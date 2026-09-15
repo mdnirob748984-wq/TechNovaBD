@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TechNovaBD - Online Shop</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">TechNovaBD</div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#products">Products</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <button class="cart-btn" onclick="openCart()">
+        🛒 Cart <span id="cartCount">0</span>
+    </button>
+</header>
+
+<section id="home" class="hero">
+
+    <h1>Welcome to TechNovaBD</h1>
+
+    <p>
+        আপনার প্রয়োজনীয় Technology Products
+        এক জায়গায়
+    </p>
+
+    <button onclick="scrollToProducts()">
+        Shop Now
+    </button>
+
+</section>
+
+<section id="products">
+
+    <h2>Our Products</h2>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="পণ্য খুঁজুন..."
+            oninput="searchProducts()"
+        >
+
+    </div>
+
+    <div id="productList" class="products"></div>
+
+</section>
+
+<!-- Cart Modal -->
+
+<div id="cartModal" class="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeCart()">×</span>
+
+        <h2>🛒 Your Cart</h2>
+
+        <div id="cartItems"></div>
+
+        <h3>
+            Total: ৳<span id="cartTotal">0</span>
+        </h3>
+
+        <button
+            onclick="checkout()"
+            class="checkout-btn">
+            Checkout
+        </button>
+
+    </div>
+
+</div>
+
+<section id="contact" class="contact">
+
+    <h2>Contact Us</h2>
+
+    <p>📱 WhatsApp: 01759748984</p>
+
+    <p>📧 Email: mdnirob748984@gmail.com</p>
+
+</section>
+
+<footer>
+
+    <p>
+        © 2026 TechNovaBD. All Rights Reserved.
+    </p>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
