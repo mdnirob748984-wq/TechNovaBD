@@ -253,3 +253,32 @@ footer {
         font-size: 17px;
     }
 }
+#orderForm label {
+    display: block;
+    margin: 12px 0 6px;
+    font-weight: bold;
+}
+
+#orderForm input,
+#orderForm textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+#orderSummary {
+    background: #f3f4f6;
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 8px;
+}
+
+#orderSummary p {
+    margin: 8px 0;
+}
+
+#orderMessage {
+    margin-top: 10px;
+}
