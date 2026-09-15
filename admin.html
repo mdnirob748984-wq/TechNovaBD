@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TechNovaBD Admin Panel</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .box {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input,
+        button,
+        select {
+            width: 100%;
+            padding: 12px;
+            margin: 7px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            cursor: pointer;
+            background: #111827;
+            color: white;
+            border: 0;
+            border-radius: 6px;
+        }
+
+        .logout {
+            background: #dc2626;
+        }
+
+        .order {
+            background: white;
+            padding: 18px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #0001;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .products {
+            background: #f8fafc;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 6px;
+        }
+
+        .error {
+            color: #dc2626;
+        }
+
+        .success {
+            color: #16a34a;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+    <h1>🛠️ TechNovaBD Admin Panel</h1>
+
+
+    <!-- LOGIN -->
+
+    <div id="loginBox">
+
+        <h2>Admin Login</h2>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Admin Email"
+        >
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Password"
+        >
+
+        <button onclick="login()">
+            Login
+        </button>
+
+        <p id="loginMessage"></p>
+
+    </div>
+
+
+    <!-- ADMIN PANEL -->
+
+    <div id="adminPanel" class="hidden">
+
+        <button
+            class="logout"
+            onclick="logout()"
+        >
+            Logout
+        </button>
+
+        <h2>
+            📦 Customer Orders
+        </h2>
+
+        <button onclick="loadOrders()">
+            🔄 Refresh Orders
+        </button>
+
+        <div id="orders">
+            Loading...
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL =
+    "https://dcmeprqtygptljxjnbku.supabase.co";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_UQ_deuuX94nqT77envaRJg_VZXMhZqC";
+
+
+let accessToken = null;
+
+
+/* LOGIN */
+
+async function login() {
+
+    const email =
+        document.getElementById(
+            "email"
+        ).value.trim();
+
+    const password =
+        document.getElementById(
+            "password"
+        ).value;
+
+
+    const message =
+        document.getElementById(
+            "loginMessage"
+        );
+
+
+    message.textContent =
+        "⏳ Login হচ্ছে...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                SUPABASE_URL +
+                "/auth/v1/token?grant_type=password",
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "apikey":
+                            SUPABASE_KEY
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            email:
+                                email,
+
+                            password:
+                                password
+
+                        })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.msg ||
+                data.error_description ||
+                "Login failed"
+            );
+
+        }
+
+
+        accessToken =
+            data.access_token;
+
+
+        document.getElementById(
+            "loginBox"
+        ).classList.add("hidden");
+
+
+        document.getElementById(
+            "adminPanel"
+        ).classList.remove("hidden");
+
+
+        loadOrders();
+
+
+    } catch (error) {
+
+        message.innerHTML =
+            `<span class="error">
+                ❌ ${error.message}
+            </span>`;
+
+    }
+
+}
+
+
+/* LOAD ORDERS */
+
+async function loadOrders() {
+
+    const ordersDiv =
+        document.getElementById(
+            "orders"
+        );
+
+
+    ordersDiv.innerHTML =
+        "⏳ Orders loading...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                SUPABASE_URL +
+                "/rest/v1/orders?select=*&order=created_at.desc",
+                {
+
+                    headers: {
+
+                        "apikey":
+                            SUPABASE_KEY,
+
+                        "Authorization":
+                            "Bearer " +
+                            accessToken
+
+                    }
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                data.hint ||
+                "Cannot load orders"
+            );
+
+        }
+
+
+        if (data.length === 0) {
+
+            ordersDiv.innerHTML =
+                "<p>এখনো কোনো Order নেই।</p>";
+
+            return;
+
+        }
+
+
+        ordersDiv.innerHTML = "";
+
+
+        data.forEach(order => {
+
+            let productHTML = "";
+
+
+            if (Array.isArray(order.products)) {
+
+                order.products.forEach(product => {
+
+                    productHTML += `
+
+                        <div>
+                            ${product.name}
+                            × ${product.quantity}
+                            — ৳${product.price}
+                        </div>
+
+                    `;
+
+                });
+
+            }
+
+
+            ordersDiv.innerHTML += `
+
+                <div class="order">
+
+                    <h3>
+                        📦 ${order.order_id}
+                    </h3>
+
+                    <p>
+                        <strong>নাম:</strong>
+                        ${order.customer_name}
+                    </p>
+
+                    <p>
+                        <strong>ফোন:</strong>
+                        ${order.phone}
+                    </p>
+
+                    <p>
+                        <strong>ঠিকানা:</strong>
+                        ${order.address}
+                    </p>
+
+                    <div class="products">
+
+                        <strong>
+                            পণ্য:
+                        </strong>
+
+                        ${productHTML}
+
+                    </div>
+
+                    <p>
+                        <strong>
+                            মোট:
+                        </strong>
+
+                        ৳${order.total}
+
+                    </p>
+
+                    <label>
+                        Status:
+                    </label>
+
+                    <select
+                        onchange="
+                            updateStatus(
+                                '${order.order_id}',
+                                this.value
+                            )
+                        "
+                    >
+
+                        <option
+                            value="Pending"
+                            ${order.status === "Pending" ? "selected" : ""}
+                        >
+                            Pending
+                        </option>
+
+                        <option
+                            value="Confirmed"
+                            ${order.status === "Confirmed" ? "selected" : ""}
+                        >
+                            Confirmed
+                        </option>
+
+                        <option
+                            value="Delivered"
+                            ${order.status === "Delivered" ? "selected" : ""}
+                        >
+                            Delivered
+                        </option>
+
+                        <option
+                            value="Cancelled"
+                            ${order.status === "Cancelled" ? "selected" : ""}
+                        >
+                            Cancelled
+                        </option>
+
+                    </select>
+
+                    <small>
+                        ${order.created_at || ""}
+                    </small>
+
+                </div>
+
+            `;
+
+        });
+
+
+    } catch (error) {
+
+        ordersDiv.innerHTML =
+            `<p class="error">
+                ❌ ${error.message}
+            </p>`;
+
+    }
+
+}
+
+
+/* UPDATE STATUS */
+
+async function updateStatus(
+    orderId,
+    status
+) {
+
+    try {
+
+        const response =
+            await fetch(
+                SUPABASE_URL +
+                "/rest/v1/orders?order_id=eq." +
+                encodeURIComponent(orderId),
+                {
+
+                    method: "PATCH",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "apikey":
+                            SUPABASE_KEY,
+
+                        "Authorization":
+                            "Bearer " +
+                            accessToken,
+
+                        "Prefer":
+                            "return=minimal"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            status:
+                                status
+
+                        })
+
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                await response.text()
+            );
+
+        }
+
+
+        alert(
+            "✅ Status আপডেট হয়েছে"
+        );
+
+
+    } catch (error) {
+
+        alert(
+            "❌ Status আপডেট হয়নি"
+        );
+
+    }
+
+}
+
+
+/* LOGOUT */
+
+function logout() {
+
+    accessToken = null;
+
+
+    document.getElementById(
+        "adminPanel"
+    ).classList.add("hidden");
+
+
+    document.getElementById(
+        "loginBox"
+    ).classList.remove("hidden");
+
+}
+
+</script>
+
+</body>
+
+  </html>
