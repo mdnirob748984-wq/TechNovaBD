@@ -457,147 +457,7 @@ function closeOrder() {
 }
 
 
-document.getElementById(
-    "orderForm"
-).addEventListener(
-    "submit",
-    function(e) {
 
-        e.preventDefault();
-
-
-        const name =
-            document.getElementById(
-                "customerName"
-            ).value.trim();
-
-
-        const phone =
-            document.getElementById(
-                "customerPhone"
-            ).value.trim();
-
-
-        const address =
-            document.getElementById(
-                "customerAddress"
-            ).value.trim();
-
-
-        let total = 0;
-
-        cart.forEach(item => {
-
-            total +=
-                item.price *
-                item.quantity;
-
-        });
-
-
-        const order = {
-
-            orderId:
-                "TN" +
-                Date.now(),
-
-            customerName:
-                name,
-
-            phone:
-                phone,
-
-            address:
-                address,
-
-            products:
-                cart.map(item => ({
-
-                    name: item.name,
-
-                    quantity:
-                        item.quantity,
-
-                    price:
-                        item.price
-
-                })),
-
-            total:
-                total,
-
-            date:
-                new Date().toLocaleString(),
-
-            status:
-                "Pending"
-
-        };
-
-
-        /*
-         * আপাতত Order ফোনের Browser-এ
-         * Local Storage-এ সংরক্ষণ হবে।
-         */
-
-        let orders =
-            JSON.parse(
-                localStorage.getItem(
-                    "technovabd_orders"
-                )
-            ) || [];
-
-
-        orders.push(order);
-
-
-        localStorage.setItem(
-            "technovabd_orders",
-            JSON.stringify(orders)
-        );
-
-
-        document.getElementById(
-            "orderMessage"
-        ).innerHTML = `
-
-            <div style="
-                margin-top:15px;
-                padding:15px;
-                background:#dcfce7;
-                border-radius:8px;
-                text-align:center;
-            ">
-
-                ✅ আপনার অর্ডার সফল হয়েছে!
-
-                <br><br>
-
-                Order ID:
-                <strong>
-                    ${order.orderId}
-                </strong>
-
-                <br><br>
-
-                মোট:
-                <strong>
-                    ৳${order.total}
-                </strong>
-
-            </div>
-
-        `;
-
-
-        cart = [];
-
-        updateCart();
-
-
-        document.getElementById(
-            "orderForm"
-        ).reset();
 
     }
 );
@@ -648,7 +508,181 @@ window.onclick = function(event) {
         document.getElementById(
             "orderModal"
         );
+const SUPABASE_URL =
+    "https://dcmeprqtygptljxjnbku.supabase.co";
 
+const SUPABASE_KEY =
+    "এখানে_তোমার_নতুন_Publishable_Key_দাও";
+
+
+document.getElementById(
+    "orderForm"
+).addEventListener(
+    "submit",
+    async function(e) {
+
+        e.preventDefault();
+
+        const name =
+            document.getElementById(
+                "customerName"
+            ).value.trim();
+
+        const phone =
+            document.getElementById(
+                "customerPhone"
+            ).value.trim();
+
+        const address =
+            document.getElementById(
+                "customerAddress"
+            ).value.trim();
+
+        let total = 0;
+
+        cart.forEach(item => {
+            total +=
+                item.price *
+                item.quantity;
+        });
+
+        const order = {
+
+            order_id:
+                "TN" + Date.now(),
+
+            customer_name:
+                name,
+
+            phone:
+                phone,
+
+            address:
+                address,
+
+            products:
+                cart.map(item => ({
+                    name: item.name,
+                    quantity: item.quantity,
+                    price: item.price
+                })),
+
+            total:
+                total,
+
+            status:
+                "Pending"
+        };
+
+        const message =
+            document.getElementById(
+                "orderMessage"
+            );
+
+        message.innerHTML =
+            "⏳ অর্ডার পাঠানো হচ্ছে...";
+
+        try {
+
+            const response =
+                await fetch(
+                    SUPABASE_URL +
+                    "/rest/v1/orders",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json",
+
+                            "apikey":
+                                SUPABASE_KEY,
+
+                            "Authorization":
+                                "Bearer " +
+                                SUPABASE_KEY,
+
+                            "Prefer":
+                                "return=minimal"
+                        },
+
+                        body:
+                            JSON.stringify(order)
+                    }
+                );
+
+            if (!response.ok) {
+
+                const error =
+                    await response.text();
+
+                throw new Error(error);
+            }
+
+            message.innerHTML = `
+
+                <div style="
+                    margin-top:15px;
+                    padding:15px;
+                    background:#dcfce7;
+                    border-radius:8px;
+                    text-align:center;
+                ">
+
+                    ✅ আপনার অর্ডার সফল হয়েছে!
+
+                    <br><br>
+
+                    Order ID:
+                    <strong>
+                        ${order.order_id}
+                    </strong>
+
+                    <br><br>
+
+                    মোট:
+                    <strong>
+                        ৳${order.total}
+                    </strong>
+
+                </div>
+
+            `;
+
+            cart = [];
+
+            updateCart();
+
+            document.getElementById(
+                "orderForm"
+            ).reset();
+
+        } catch (error) {
+
+            console.error(error);
+
+            message.innerHTML = `
+
+                <div style="
+                    margin-top:15px;
+                    padding:15px;
+                    background:#fee2e2;
+                    border-radius:8px;
+                ">
+
+                    ❌ অর্ডার পাঠানো যায়নি।
+
+                    <br><br>
+
+                    আবার চেষ্টা করুন।
+
+                </div>
+
+            `;
+        }
+
+    }
+);
 
     if (event.target === cartModal) {
 
