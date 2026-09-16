@@ -513,14 +513,17 @@
 
         catch (error) {
 
-            console.error(error);
+    console.error("PRODUCT ERROR:", error);
 
-            showMessage(
-    "productMessage",
-    "❌ Product Save করা যায়নি।<br><br>" +
-    escapeHtml(error.message),
-    "error"
-);
+    showMessage(
+        "productMessage",
+        "❌ Product Save করা যায়নি।<br><br>" +
+        "<strong>Error:</strong><br>" +
+        escapeHtml(error.message || String(error)),
+        "error"
+    );
+
+        }
 
         }
 
