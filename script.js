@@ -69,9 +69,19 @@ function displayProducts(list = products) {
                     ৳${product.price}
                 </div>
 
-                <button onclick="addToCart(${product.id})">
-                    Add to Cart
-                </button>
+                <div class="product-buttons">
+
+                    <button
+                        onclick="addToCart(${product.id})">
+                        🛒 Add to Cart
+                    </button>
+
+                    <button
+                        onclick="buyNow(${product.id})">
+                        ⚡ Buy Now
+                    </button>
+
+                </div>
 
             </div>
         `;
@@ -103,12 +113,60 @@ function addToCart(id) {
             ...product,
             quantity: 1
         });
-
     }
 
     updateCart();
 
     alert(product.name + " Cart-এ যোগ হয়েছে!");
+}
+
+
+/* =========================
+   BUY NOW
+========================= */
+
+function buyNow(id) {
+
+    const product =
+        products.find(p => p.id === id);
+
+    if (!product) return;
+
+    /*
+       Buy Now করলে Cart-এ শুধু
+       নির্বাচিত Product থাকবে।
+    */
+
+    cart = [
+        {
+            ...product,
+            quantity: 1
+        }
+    ];
+
+    updateCart();
+
+    /*
+       Order section থাকলে সেখানে নিয়ে যাবে।
+    */
+
+    const orderSection =
+        document.getElementById("order");
+
+    if (orderSection) {
+
+        orderSection.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    } else {
+
+        /*
+           Order section না থাকলে Cart খুলবে।
+        */
+
+        openCart();
+    }
 }
 
 
@@ -129,7 +187,9 @@ function updateCart() {
         document.getElementById("cartCount");
 
     if (cartCount) {
+
         cartCount.textContent = count;
+
     }
 }
 
@@ -144,7 +204,9 @@ function openCart() {
         document.getElementById("cartModal");
 
     if (modal) {
+
         modal.style.display = "block";
+
     }
 
     displayCart();
@@ -161,7 +223,9 @@ function closeCart() {
         document.getElementById("cartModal");
 
     if (modal) {
+
         modal.style.display = "none";
+
     }
 }
 
@@ -184,13 +248,16 @@ function displayCart() {
 
     let total = 0;
 
+
     if (cart.length === 0) {
 
         cartItems.innerHTML =
             "<p>আপনার Cart খালি।</p>";
 
         if (cartTotal) {
+
             cartTotal.textContent = "0";
+
         }
 
         return;
@@ -205,6 +272,7 @@ function displayCart() {
         total += itemTotal;
 
         cartItems.innerHTML += `
+
             <div class="cart-item">
 
                 <span>
@@ -216,14 +284,97 @@ function displayCart() {
                     ৳${itemTotal}
                 </strong>
 
+                <div>
+
+                    <button
+                        onclick="decreaseQuantity(${item.id})">
+                        −
+                    </button>
+
+                    <button
+                        onclick="increaseQuantity(${item.id})">
+                        +
+                    </button>
+
+                    <button
+                        onclick="removeFromCart(${item.id})">
+                        🗑️
+                    </button>
+
+                </div>
+
             </div>
         `;
     });
 
 
     if (cartTotal) {
+
         cartTotal.textContent = total;
+
     }
+}
+
+
+/* =========================
+   INCREASE QUANTITY
+========================= */
+
+function increaseQuantity(id) {
+
+    const item =
+        cart.find(item => item.id === id);
+
+    if (!item) return;
+
+    item.quantity++;
+
+    updateCart();
+
+    displayCart();
+}
+
+
+/* =========================
+   DECREASE QUANTITY
+========================= */
+
+function decreaseQuantity(id) {
+
+    const item =
+        cart.find(item => item.id === id);
+
+    if (!item) return;
+
+    if (item.quantity > 1) {
+
+        item.quantity--;
+
+    } else {
+
+        cart =
+            cart.filter(item => item.id !== id);
+
+    }
+
+    updateCart();
+
+    displayCart();
+}
+
+
+/* =========================
+   REMOVE FROM CART
+========================= */
+
+function removeFromCart(id) {
+
+    cart =
+        cart.filter(item => item.id !== id);
+
+    updateCart();
+
+    displayCart();
 }
 
 
@@ -239,7 +390,8 @@ function searchProducts() {
     if (!searchInput) return;
 
     const search =
-        searchInput.value.toLowerCase();
+        searchInput.value
+            .toLowerCase();
 
     const result =
         products.filter(product =>
@@ -282,9 +434,29 @@ function checkout() {
         return;
     }
 
-    alert(
-        "Checkout system পরের ধাপে তৈরি করা হবে।"
-    );
+    /*
+       পরের ধাপে এখানে
+       সম্পূর্ণ Order System
+       যোগ করা হবে।
+    */
+
+    const orderSection =
+        document.getElementById("order");
+
+    if (orderSection) {
+
+        closeCart();
+
+        orderSection.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    } else {
+
+        alert(
+            "Order Form পরের ধাপে তৈরি করা হবে।"
+        );
+    }
 }
 
 
@@ -293,4 +465,5 @@ function checkout() {
 ========================= */
 
 displayProducts();
+
 updateCart();
