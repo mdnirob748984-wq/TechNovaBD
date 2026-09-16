@@ -1122,7 +1122,121 @@ setInterval(
 
 <script src="script.js?v=5">
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", async function () {
 
+    const box = document.getElementById("productList");
+
+    if (!box) {
+        alert("❌ productList পাওয়া যায়নি");
+        return;
+    }
+
+    box.innerHTML = `
+        <div style="text-align:center;padding:30px;">
+            🔄 Supabase থেকে পণ্য আনা হচ্ছে...
+        </div>
+    `;
+
+    try {
+
+        if (!window.supabase) {
+            box.innerHTML = `
+                <div style="color:red;text-align:center;padding:30px;">
+                    ❌ Supabase library লোড হয়নি।
+                </div>
+            `;
+            return;
+        }
+
+        const testClient = window.supabase.createClient(
+            "https://dcmeprqtygptljxjnbku.supabase.co",
+            "sb_publishable_UQ_deuuX94nqT77envaRJg_VZXMhZqC"
+        );
+
+        const { data, error } = await testClient
+            .from("products")
+            .select("id,name,price,image")
+            .order("id", { ascending: false });
+
+        if (error) {
+            box.innerHTML = `
+                <div style="
+                    color:red;
+                    text-align:center;
+                    padding:30px;
+                    background:#fff0f0;
+                ">
+                    <h3>❌ Supabase Error</h3>
+                    <p>${error.message}</p>
+                    <p>Code: ${error.code || "N/A"}</p>
+                </div>
+            `;
+            return;
+        }
+
+        if (!data || data.length === 0) {
+            box.innerHTML = `
+                <div style="text-align:center;padding:30px;">
+                    📦 কোনো পণ্য পাওয়া যায়নি।
+                </div>
+            `;
+            return;
+        }
+
+        box.innerHTML = "";
+
+        data.forEach(product => {
+
+            box.innerHTML += `
+                <div class="product">
+
+                    <img
+                        src="${product.image || ""}"
+                        alt="${product.name || "Product"}"
+                        style="width:100%;"
+                    >
+
+                    <h3>
+                        ${product.name || "Product"}
+                    </h3>
+
+                    <div class="price">
+                        ৳${Number(product.price || 0)}
+                    </div>
+
+                    <button
+                        onclick="addToCart('${product.id}')">
+                        🛒 Add to Cart
+                    </button>
+
+                    <button
+                        onclick="buyNow('${product.id}')">
+                        ⚡ Buy Now
+                    </button>
+
+                </div>
+            `;
+
+        });
+
+    } catch (err) {
+
+        box.innerHTML = `
+            <div style="
+                color:red;
+                text-align:center;
+                padding:30px;
+            ">
+                <h3>❌ JavaScript Error</h3>
+                <p>${err.message || err}</p>
+            </div>
+        `;
+
+    }
+
+});
+</script>
 
 </body>
 
