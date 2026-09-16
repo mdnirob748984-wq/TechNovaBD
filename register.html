@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Register - TechNovaBD</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -23,7 +30,7 @@
             padding: 20px;
         }
 
-        .box {
+        .register-box {
             width: 100%;
             max-width: 420px;
             background: white;
@@ -57,6 +64,11 @@
             border: 1px solid #ddd;
             border-radius: 8px;
             font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
         }
 
         button {
@@ -68,15 +80,18 @@
             background: #2563eb;
             color: white;
             font-size: 16px;
+            cursor: pointer;
         }
 
         button:disabled {
             opacity: .6;
+            cursor: not-allowed;
         }
 
-        #message {
+        .message {
             text-align: center;
             margin-top: 15px;
+            line-height: 1.6;
         }
 
         .login {
@@ -84,158 +99,321 @@
             margin-top: 20px;
         }
 
-        a {
+        .login a {
             color: #2563eb;
             text-decoration: none;
         }
+
+        .back {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .back a {
+            color: #555;
+            text-decoration: none;
+        }
+
     </style>
+
 </head>
 
 <body>
 
-<div class="box">
+<div class="register-box">
 
     <div class="logo">
         TechNovaBD
     </div>
 
-    <h2>Create Account</h2>
+    <h2>
+        Create Account
+    </h2>
+
 
     <form id="registerForm">
 
-        <label>Name</label>
+
+        <label for="name">
+            Name
+        </label>
 
         <input
             type="text"
             id="name"
             placeholder="আপনার নাম"
+            autocomplete="name"
             required
         >
 
-        <label>Email</label>
+
+        <label for="email">
+            Email
+        </label>
 
         <input
             type="email"
             id="email"
             placeholder="আপনার Email"
+            autocomplete="email"
             required
         >
 
-        <label>Password</label>
+
+        <label for="password">
+            Password
+        </label>
 
         <input
             type="password"
             id="password"
-            placeholder="কমপক্ষে ৮ অক্ষর"
-            minlength="8"
+            placeholder="কমপক্ষে 6 অক্ষর"
+            autocomplete="new-password"
+            minlength="6"
             required
         >
 
+
+        <label for="confirmPassword">
+            Confirm Password
+        </label>
+
+        <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Password আবার লিখুন"
+            autocomplete="new-password"
+            minlength="6"
+            required
+        >
+
+
         <button
             type="submit"
-            id="registerButton">
+            id="registerButton"
+        >
             Register
         </button>
 
     </form>
 
-    <div id="message"></div>
+
+    <div
+        id="message"
+        class="message"
+    ></div>
+
 
     <div class="login">
+
         আগে থেকেই Account আছে?
+
         <a href="login.html">
             Login করুন
         </a>
+
+    </div>
+
+
+    <div class="back">
+
+        <a href="index.html">
+            ← Home Page
+        </a>
+
     </div>
 
 </div>
 
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 
-const API = "http://localhost:3000/api";
+const SUPABASE_URL =
+    "https://dcmeprqtygptljxjnbku.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_UQ_deuuX94nqT77envaRJg_VZXMhZqC";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
 
 const form =
-    document.getElementById("registerForm");
+    document.getElementById(
+        "registerForm"
+    );
 
 const message =
-    document.getElementById("message");
+    document.getElementById(
+        "message"
+    );
 
 const button =
-    document.getElementById("registerButton");
+    document.getElementById(
+        "registerButton"
+    );
 
 
-form.addEventListener("submit", async function(e) {
+form.addEventListener(
+    "submit",
+    async function(event) {
 
-    e.preventDefault();
+        event.preventDefault();
 
-    const name =
-        document.getElementById("name").value.trim();
 
-    const email =
-        document.getElementById("email").value.trim();
+        const name =
+            document
+                .getElementById("name")
+                .value
+                .trim();
 
-    const password =
-        document.getElementById("password").value;
+        const email =
+            document
+                .getElementById("email")
+                .value
+                .trim();
 
-    message.textContent =
-        "Account তৈরি হচ্ছে...";
+        const password =
+            document
+                .getElementById("password")
+                .value;
 
-    button.disabled = true;
+        const confirmPassword =
+            document
+                .getElementById(
+                    "confirmPassword"
+                )
+                .value;
 
-    try {
 
-        const response = await fetch(
-            API + "/auth/register",
-            {
-                method: "POST",
+        if (!name) {
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+            message.textContent =
+                "❌ আপনার নাম লিখুন।";
 
-                credentials: "include",
-
-                body: JSON.stringify({
-                    name: name,
-                    email: email,
-                    password: password
-                })
-            }
-        );
-
-        const data =
-            await response.json();
-
-        if (!response.ok) {
-
-            throw new Error(
-                data.message ||
-                "Registration failed"
-            );
+            return;
         }
 
+
+        if (password.length < 6) {
+
+            message.textContent =
+                "❌ Password কমপক্ষে 6 অক্ষরের হতে হবে।";
+
+            return;
+        }
+
+
+        if (password !== confirmPassword) {
+
+            message.textContent =
+                "❌ Password দুটো একই নয়।";
+
+            return;
+        }
+
+
+        button.disabled = true;
+
         message.textContent =
-            "✅ Account সফলভাবে তৈরি হয়েছে!";
+            "⏳ Account তৈরি হচ্ছে...";
 
-        setTimeout(() => {
 
-            window.location.href =
-                "login.html";
+        try {
 
-        }, 1200);
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.auth
+                    .signUp({
 
-    } catch (error) {
+                        email: email,
 
-        message.textContent =
-            "❌ " + error.message;
+                        password: password,
 
-    } finally {
+                        options: {
 
-        button.disabled = false;
+                            data: {
+                                name: name
+                            },
+
+                            emailRedirectTo:
+                                window.location.origin +
+                                "/login.html"
+
+                        }
+
+                    });
+
+
+            if (error) {
+                throw error;
+            }
+
+
+            /*
+             * Email confirmation ON থাকলে
+             * session null হতে পারে।
+             */
+
+            if (data.session) {
+
+                message.textContent =
+                    "✅ Account তৈরি হয়েছে!";
+
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "index.html";
+
+                }, 1000);
+
+
+            } else {
+
+                message.innerHTML =
+                    `
+                    ✅ Account তৈরি হয়েছে!<br>
+                    আপনার Email inbox দেখুন এবং
+                    verification সম্পন্ন করুন।<br>
+                    তারপর Login করুন।
+                    `;
+
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                "Register Error:",
+                error
+            );
+
+
+            message.textContent =
+                "❌ " +
+                (
+                    error.message ||
+                    "Registration failed"
+                );
+
+
+        } finally {
+
+            button.disabled = false;
+
+        }
 
     }
-
-});
+);
 
 </script>
 
