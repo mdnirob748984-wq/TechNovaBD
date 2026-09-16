@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>TechNovaBD - Online Shop</title>
 
@@ -27,19 +28,35 @@
         </a>
 
         <nav class="main-nav">
-            <a href="#home">Home</a>
-            <a href="#products">Products</a>
-            <a href="#tracking">Tracking</a>
-            <a href="#contact">Contact</a>
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#products">
+                Products
+            </a>
+
+            <a href="#tracking">
+                Tracking
+            </a>
+
+            <a href="#contact">
+                Contact
+            </a>
+
         </nav>
 
-        <button class="cart-button"
-                onclick="openCart()">
+        <button
+            class="cart-button"
+            onclick="openCart()">
 
             🛒
             <span>Cart</span>
 
-            <b id="cartCount">0</b>
+            <b id="cartCount">
+                0
+            </b>
 
         </button>
 
@@ -52,7 +69,9 @@
      HERO
 ========================= -->
 
-<section id="home" class="hero">
+<section
+    id="home"
+    class="hero">
 
     <div class="hero-content">
 
@@ -70,8 +89,9 @@
             এক জায়গায় সহজে কিনুন।
         </p>
 
-        <button class="hero-button"
-                onclick="scrollToProducts()">
+        <button
+            class="hero-button"
+            onclick="scrollToProducts()">
 
             🛍️ Shop Now
 
@@ -86,12 +106,15 @@
      PRODUCTS
 ========================= -->
 
-<section id="products"
-         class="products-section">
+<section
+    id="products"
+    class="products-section">
 
     <div class="section-heading">
 
-        <span>OUR PRODUCTS</span>
+        <span>
+            OUR PRODUCTS
+        </span>
 
         <h2>
             জনপ্রিয় পণ্যসমূহ
@@ -117,12 +140,18 @@
     </div>
 
 
-    <div id="productList"
-         class="products-grid">
+    <div
+        id="productList"
+        class="products-grid">
 
         <div class="loading-box">
+
             <div class="loader"></div>
-            <p>পণ্য লোড হচ্ছে...</p>
+
+            <p>
+                পণ্য লোড হচ্ছে...
+            </p>
+
         </div>
 
     </div>
@@ -131,39 +160,55 @@
 
 
 <!-- =========================
-     CART DRAWER
+     CART
 ========================= -->
 
-<div id="cartOverlay"
-     class="cart-overlay"
-     onclick="closeCart()">
+<div
+    id="cartOverlay"
+    class="cart-overlay"
+    onclick="closeCart()">
 </div>
 
 
-<aside id="cartDrawer"
-       class="cart-drawer">
+<aside
+    id="cartDrawer"
+    class="cart-drawer">
 
     <div class="cart-header">
 
         <div>
-            <h2>🛒 আপনার Cart</h2>
+
+            <h2>
+                🛒 আপনার Cart
+            </h2>
 
             <p>
-                <span id="cartHeaderCount">0</span>
+
+                <span id="cartHeaderCount">
+                    0
+                </span>
+
                 টি পণ্য
+
             </p>
+
         </div>
 
-        <button onclick="closeCart()"
-                class="close-button">
+
+        <button
+            onclick="closeCart()"
+            class="close-button">
+
             ×
+
         </button>
 
     </div>
 
 
-    <div id="cartItems"
-         class="cart-items">
+    <div
+        id="cartItems"
+        class="cart-items">
 
         <div class="empty-cart">
 
@@ -243,21 +288,26 @@
      CHECKOUT
 ========================= -->
 
-<section id="checkout"
-         class="checkout-section hidden">
+<section
+    id="checkout"
+    class="checkout-section hidden">
 
     <div class="checkout-container">
 
+
         <div class="checkout-title">
 
-            <button onclick="backToShop()"
-                    class="back-button">
+            <button
+                onclick="backToShop()"
+                class="back-button">
 
                 ← Back to Shop
 
             </button>
 
-            <span>CHECKOUT</span>
+            <span>
+                CHECKOUT
+            </span>
 
             <h2>
                 📦 অর্ডার সম্পন্ন করুন
@@ -283,6 +333,7 @@
 
 
                 <div class="form-grid">
+
 
                     <div class="form-group full">
 
@@ -413,8 +464,7 @@
                         <textarea
                             id="detailsAddress"
                             rows="4"
-                            placeholder="বাড়ি নম্বর, রোড, মার্কেট ইত্যাদি">
-                        </textarea>
+                            placeholder="বাড়ি নম্বর, রোড, মার্কেট ইত্যাদি"></textarea>
 
                     </div>
 
@@ -425,18 +475,17 @@
 
             <!-- ORDER SUMMARY -->
 
-            <div class="checkout-card order-summary-card">
+            <div
+                class="checkout-card order-summary-card">
 
                 <h3>
                     🛒 Order Summary
                 </h3>
 
 
-                <div id="checkoutProducts"
-                     class="checkout-products">
-
-                    <!-- Products -->
-
+                <div
+                    id="checkoutProducts"
+                    class="checkout-products">
                 </div>
 
 
@@ -447,7 +496,9 @@
                     </span>
 
                     <strong>
-                        ৳<span id="productTotal">0</span>
+                        ৳<span id="productTotal">
+                            0
+                        </span>
                     </strong>
 
                 </div>
@@ -460,7 +511,9 @@
                     </span>
 
                     <strong>
-                        ৳<span id="deliveryCharge">0</span>
+                        ৳<span id="deliveryCharge">
+                            0
+                        </span>
                     </strong>
 
                 </div>
@@ -473,7 +526,9 @@
                     </span>
 
                     <strong>
-                        ৳<span id="grandTotal">0</span>
+                        ৳<span id="grandTotal">
+                            0
+                        </span>
                     </strong>
 
                 </div>
@@ -506,8 +561,9 @@
      ORDER SUCCESS
 ========================= -->
 
-<section id="successSection"
-         class="success-section hidden">
+<section
+    id="successSection"
+    class="success-section hidden">
 
     <div class="success-card">
 
@@ -515,9 +571,11 @@
             ✓
         </div>
 
+
         <h2>
             Order Confirmed!
         </h2>
+
 
         <p>
             🎉 আপনার অর্ডার সফলভাবে গ্রহণ করা হয়েছে।
@@ -526,31 +584,52 @@
 
         <div class="success-details">
 
+
             <div>
-                <span>Order ID</span>
+
+                <span>
+                    Order ID
+                </span>
+
                 <strong id="successOrderId">
                     —
                 </strong>
+
             </div>
 
+
             <div>
-                <span>Total Amount</span>
+
+                <span>
+                    Total Amount
+                </span>
+
                 <strong>
-                    ৳<span id="successTotal">0</span>
+                    ৳<span id="successTotal">
+                        0
+                    </span>
                 </strong>
+
             </div>
 
+
             <div>
-                <span>Status</span>
+
+                <span>
+                    Status
+                </span>
+
                 <strong class="pending-text">
                     Pending
                 </strong>
+
             </div>
 
         </div>
 
 
         <div class="success-buttons">
+
 
             <button
                 onclick="goToTracking()"
@@ -580,14 +659,18 @@
      TRACKING
 ========================= -->
 
-<section id="tracking"
-         class="tracking-section">
+<section
+    id="tracking"
+    class="tracking-section">
 
     <div class="tracking-container">
 
+
         <div class="section-heading">
 
-            <span>ORDER TRACKING</span>
+            <span>
+                ORDER TRACKING
+            </span>
 
             <h2>
                 🔎 আপনার Order Track করুন
@@ -606,6 +689,7 @@
                 type="text"
                 id="trackingOrderId"
                 placeholder="যেমন: TN1758000000000">
+
 
             <button onclick="trackOrder()">
                 Track Order
@@ -626,12 +710,16 @@
      CONTACT
 ========================= -->
 
-<section id="contact"
-         class="contact-section">
+<section
+    id="contact"
+    class="contact-section">
+
 
     <div class="section-heading">
 
-        <span>CONTACT US</span>
+        <span>
+            CONTACT US
+        </span>
 
         <h2>
             📞 আমাদের সাথে যোগাযোগ করুন
@@ -642,11 +730,15 @@
 
     <div class="contact-grid">
 
-        <a href="https://wa.me/8801762437958"
-           target="_blank"
-           class="contact-card">
 
-            <div>💬</div>
+        <a
+            href="https://wa.me/8801762437958"
+            target="_blank"
+            class="contact-card">
+
+            <div>
+                💬
+            </div>
 
             <h3>
                 WhatsApp 1
@@ -659,11 +751,14 @@
         </a>
 
 
-        <a href="https://wa.me/8801777556984"
-           target="_blank"
-           class="contact-card">
+        <a
+            href="https://wa.me/8801777556984"
+            target="_blank"
+            class="contact-card">
 
-            <div>💬</div>
+            <div>
+                💬
+            </div>
 
             <h3>
                 WhatsApp 2
@@ -676,10 +771,13 @@
         </a>
 
 
-        <a href="mailto:mdnirob748984@gmail.com"
-           class="contact-card">
+        <a
+            href="mailto:mdnirob748984@gmail.com"
+            class="contact-card">
 
-            <div>📧</div>
+            <div>
+                📧
+            </div>
 
             <h3>
                 Gmail 1
@@ -692,10 +790,13 @@
         </a>
 
 
-        <a href="mailto:technovabd779@gmail.com"
-           class="contact-card">
+        <a
+            href="mailto:technovabd779@gmail.com"
+            class="contact-card">
 
-            <div>📧</div>
+            <div>
+                📧
+            </div>
 
             <h3>
                 Gmail 2
@@ -726,7 +827,8 @@
         আপনার বিশ্বস্ত Online Technology Shop
     </p>
 
-    <div class="footer-line"></div>
+    <div class="footer-line">
+    </div>
 
     <p>
         © 2026 TechNovaBD. All Rights Reserved.
@@ -741,16 +843,23 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
+<!-- তোমার আগের script.js -->
 <script src="script.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- =========================
+     LOGIN PROTECTION
+========================= -->
 
 <script>
+
 const SUPABASE_URL =
     "https://dcmeprqtygptljxjnbku.supabase.co";
 
 const SUPABASE_KEY =
     "sb_publishable_UQ_deuuX94nqT77envaRJg_VZXMhZqC";
+
 
 const supabaseClient =
     window.supabase.createClient(
@@ -758,28 +867,70 @@ const supabaseClient =
         SUPABASE_KEY
     );
 
+
 async function checkLogin() {
 
-    const {
-        data,
-        error
-    } = await supabaseClient.auth.getSession();
+    try {
 
-    if (error || !data.session) {
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.auth.getSession();
 
-        window.location.replace("login.html");
 
-        return;
+        if (error) {
+
+            console.error(
+                "Auth Error:",
+                error
+            );
+
+            window.location.replace(
+                "login.html"
+            );
+
+            return;
+        }
+
+
+        if (!data.session) {
+
+            window.location.replace(
+                "login.html"
+            );
+
+            return;
+        }
+
+
+        console.log(
+            "Logged in:",
+            data.session.user.email
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Login Check Error:",
+            error
+        );
+
+        window.location.replace(
+            "login.html"
+        );
+
     }
 
-    console.log(
-        "Logged in:",
-        data.session.user.email
-    );
 }
 
+
 checkLogin();
+
 </script>
 
+
 </body>
-                </html>
+
+</html>
