@@ -1,799 +1,529 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+    <title>TechNovaBD - Online Shop</title>
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-<title>TechNovaBD - Online Shop</title>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #222;
+        }
 
-<link rel="stylesheet" href="style.css">
+        header {
+            background: #111827;
+            color: white;
+            padding: 18px;
+            text-align: center;
+        }
 
+        header h1 {
+            margin: 0 0 8px;
+        }
+
+        header p {
+            margin: 0;
+        }
+
+        .search-box {
+            padding: 15px;
+            text-align: center;
+            background: white;
+        }
+
+        .search-box input {
+            width: 95%;
+            max-width: 500px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            padding: 15px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .product {
+            background: white;
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .product img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .product h3 {
+            margin: 10px 0 5px;
+            font-size: 18px;
+        }
+
+        .price {
+            font-size: 19px;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
+        button {
+            border: none;
+            padding: 10px 15px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .add-btn {
+            width: 100%;
+            background: #16a34a;
+            color: white;
+        }
+
+        .cart-box {
+            background: white;
+            margin: 15px auto;
+            padding: 15px;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+            gap: 10px;
+        }
+
+        .qty button {
+            background: #ddd;
+            padding: 5px 10px;
+        }
+
+        .checkout {
+            background: white;
+            margin: 15px auto;
+            padding: 20px;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .checkout h2 {
+            margin-top: 0;
+        }
+
+        .checkout input,
+        .checkout select,
+        .checkout textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 7px 0 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .total-box {
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+        }
+
+        .grand-total {
+            font-size: 21px;
+            font-weight: bold;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+
+        .order-btn {
+            width: 100%;
+            background: #2563eb;
+            color: white;
+            font-size: 17px;
+            padding: 13px;
+        }
+
+        .message {
+            text-align: center;
+            padding: 15px;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+    </style>
 </head>
-
 
 <body>
 
-
 <header>
-
-    <div class="logo">
-        TechNovaBD
-    </div>
-
-
-    <nav>
-
-        <a href="#home">
-            Home
-        </a>
-
-        <a href="#products">
-            Products
-        </a>
-
-        <a href="#contact">
-            Contact
-        </a>
-
-    </nav>
-
-
-    <button
-        class="cart-btn"
-        onclick="openCart()"
-    >
-
-        🛒 Cart
-
-        <span id="cartCount">
-            0
-        </span>
-
-    </button>
-
+    <h1>TechNovaBD</h1>
+    <p>আপনার বিশ্বস্ত অনলাইন শপ</p>
 </header>
 
+<div class="search-box">
+    <input
+        type="text"
+        id="search"
+        placeholder="প্রোডাক্ট খুঁজুন..."
+        oninput="searchProducts()"
+    >
+</div>
 
+<div id="products" class="products">
+    <div class="message">প্রোডাক্ট লোড হচ্ছে...</div>
+</div>
 
-<!-- =========================
-     HOME
-========================= -->
+<div class="cart-box">
+    <h2>🛒 আপনার Cart</h2>
 
-<section
-    id="home"
-    class="hero"
->
+    <div id="cartItems">
+        <p>Cart খালি।</p>
+    </div>
 
-    <h1>
-        Welcome to TechNovaBD
-    </h1>
+    <div class="total-box">
+        <div class="total-row">
+            <span>পণ্যের মোট:</span>
+            <span><strong><span id="cartTotal">0</span> টাকা</strong></span>
+        </div>
+    </div>
+</div>
 
+<div class="checkout">
 
-    <p>
-        আপনার প্রয়োজনীয় Technology Products এক জায়গায়
-    </p>
+    <h2>📦 অর্ডার করুন</h2>
 
+    <label>আপনার নাম</label>
+    <input
+        type="text"
+        id="customerName"
+        placeholder="আপনার নাম লিখুন"
+    >
+
+    <label>মোবাইল নম্বর</label>
+    <input
+        type="tel"
+        id="phone"
+        placeholder="01XXXXXXXXX"
+    >
+
+    <label>বিভাগ</label>
+
+    <select
+        id="division"
+        onchange="updateDeliveryCharge()"
+    >
+        <option value="">বিভাগ নির্বাচন করুন</option>
+
+        <option value="ঢাকা">ঢাকা</option>
+        <option value="চট্টগ্রাম">চট্টগ্রাম</option>
+        <option value="রাজশাহী">রাজশাহী</option>
+        <option value="খুলনা">খুলনা</option>
+        <option value="বরিশাল">বরিশাল</option>
+        <option value="সিলেট">সিলেট</option>
+        <option value="রংপুর">রংপুর</option>
+        <option value="ময়মনসিংহ">ময়মনসিংহ</option>
+    </select>
+
+    <label>জেলা</label>
+
+    <input
+        type="text"
+        id="district"
+        placeholder="জেলার নাম লিখুন"
+    >
+
+    <label>উপজেলা / থানা</label>
+
+    <input
+        type="text"
+        id="upazila"
+        placeholder="উপজেলা / থানার নাম"
+    >
+
+    <label>গ্রাম / এলাকা</label>
+
+    <input
+        type="text"
+        id="village"
+        placeholder="গ্রাম / এলাকার নাম"
+    >
+
+    <label>বিস্তারিত ঠিকানা</label>
+
+    <textarea
+        id="detailsAddress"
+        rows="3"
+        placeholder="বাড়ি নম্বর, রোড, মার্কেট ইত্যাদি"
+    ></textarea>
+
+    <div class="total-box">
+
+        <div class="total-row">
+            <span>পণ্যের মোট:</span>
+
+            <span>
+                <strong>
+                    <span id="productTotal">0</span> টাকা
+                </strong>
+            </span>
+        </div>
+
+        <div class="total-row">
+            <span>ডেলিভারি চার্জ:</span>
+
+            <span>
+                <strong>
+                    <span id="deliveryCharge">0</span> টাকা
+                </strong>
+            </span>
+        </div>
+
+        <div class="total-row grand-total">
+            <span>সর্বমোট:</span>
+
+            <span>
+                <span id="grandTotal">0</span> টাকা
+            </span>
+        </div>
+
+    </div>
 
     <button
-        onclick="scrollToProducts()"
+        class="order-btn"
+        onclick="placeOrder()"
     >
-        Shop Now
+        অর্ডার কনফার্ম করুন
     </button>
 
-</section>
-
-
-
-<!-- =========================
-     PRODUCTS
-========================= -->
-
-<section id="products">
-
-    <h2>
-        Our Products
-    </h2>
-
-
-    <div class="search-box">
-
-        <input
-            type="text"
-            id="search"
-            placeholder="পণ্য খুঁজুন..."
-            oninput="searchProducts()"
-        >
-
-    </div>
-
-
-    <div
-        id="productList"
-        class="products"
-    >
-
-        <p>
-            ⏳ Products loading...
-        </p>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     CART MODAL
-========================= -->
-
-<div
-    id="cartModal"
-    class="modal"
->
-
-    <div class="modal-content">
-
-
-        <span
-            class="close"
-            onclick="closeCart()"
-        >
-            ×
-        </span>
-
-
-        <h2>
-            🛒 Your Cart
-        </h2>
-
-
-        <div id="cartItems">
-        </div>
-
-
-        <h3>
-
-            Total:
-            ৳<span id="cartTotal">0</span>
-
-        </h3>
-
-
-        <button
-            onclick="checkout()"
-            class="checkout-btn"
-        >
-            Checkout
-        </button>
-
-
-    </div>
+    <div id="orderMessage"></div>
 
 </div>
-
-
-
-<!-- =========================
-     ORDER MODAL
-========================= -->
-
-<div
-    id="orderModal"
-    class="modal"
->
-
-    <div class="modal-content">
-
-
-        <span
-            class="close"
-            onclick="closeOrder()"
-        >
-            ×
-        </span>
-
-
-        <h2>
-            📦 Order করুন
-        </h2>
-
-
-
-        <form id="orderForm">
-
-
-            <!-- NAME -->
-
-            <label>
-                আপনার নাম
-            </label>
-
-            <input
-                type="text"
-                id="customerName"
-                placeholder="আপনার নাম লিখুন"
-                required
-            >
-
-
-
-            <!-- PHONE -->
-
-            <label>
-                মোবাইল নম্বর
-            </label>
-
-            <input
-                type="tel"
-                id="customerPhone"
-                placeholder="01XXXXXXXXX"
-                pattern="01[0-9]{9}"
-                required
-            >
-
-
-
-            <!-- DIVISION -->
-
-            <label>
-                বিভাগ
-            </label>
-
-            <select
-                id="division"
-                required
-            >
-
-                <option value="">
-                    বিভাগ নির্বাচন করুন
-                </option>
-
-                <option value="ঢাকা">
-                    ঢাকা
-                </option>
-
-                <option value="চট্টগ্রাম">
-                    চট্টগ্রাম
-                </option>
-
-                <option value="রাজশাহী">
-                    রাজশাহী
-                </option>
-
-                <option value="খুলনা">
-                    খুলনা
-                </option>
-
-                <option value="বরিশাল">
-                    বরিশাল
-                </option>
-
-                <option value="সিলেট">
-                    সিলেট
-                </option>
-
-                <option value="রংপুর">
-                    রংপুর
-                </option>
-
-                <option value="ময়মনসিংহ">
-                    ময়মনসিংহ
-                </option>
-
-            </select>
-
-
-
-            <!-- DISTRICT -->
-
-            <label>
-                জেলা
-            </label>
-
-            <input
-                type="text"
-                id="district"
-                placeholder="আপনার জেলার নাম"
-                required
-            >
-
-
-
-            <!-- UPAZILA -->
-
-            <label>
-                উপজেলা
-            </label>
-
-            <input
-                type="text"
-                id="upazila"
-                placeholder="আপনার উপজেলার নাম"
-                required
-            >
-
-
-
-            <!-- VILLAGE -->
-
-            <label>
-                গ্রাম / এলাকা
-            </label>
-
-            <input
-                type="text"
-                id="village"
-                placeholder="গ্রাম / এলাকার নাম"
-                required
-            >
-
-
-
-            <!-- DETAILS ADDRESS -->
-
-            <label>
-                বাড়ি / রোড / বিস্তারিত ঠিকানা
-            </label>
-
-            <textarea
-                id="detailsAddress"
-                placeholder="বাড়ি নম্বর, রোড নম্বর, মার্কেট ইত্যাদি লিখুন"
-                rows="4"
-                required
-            ></textarea>
-
-
-
-            <!-- ORDER PRODUCTS -->
-
-            <label>
-                অর্ডারের পণ্য
-            </label>
-
-
-            <div id="orderSummary">
-            </div>
-
-
-
-            <!-- TOTAL -->
-
-            <h3>
-
-                মোট:
-                ৳<span id="orderTotal">0</span>
-
-            </h3>
-
-
-
-            <button
-                type="submit"
-                class="checkout-btn"
-            >
-
-                ✅ অর্ডার কনফার্ম করুন
-
-            </button>
-
-
-        </form>
-
-
-
-        <div id="orderMessage">
-        </div>
-
-
-    </div>
-
-</div>
-
-
-
-<!-- =========================
-     CONTACT
-========================= -->
-
-<section
-    id="contact"
-    class="contact"
->
-
-    <h2>
-        Contact Us
-    </h2>
-
-
-    <p>
-        📱 WhatsApp: 01762437958
-    </p>
-
-
-    <p>
-        📧 Email: mdnirob748984@gmail.com
-    </p>
-
-</section>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
 
 <footer>
-
-    <p>
-        © 2026 TechNovaBD. All Rights Reserved.
-    </p>
-
+    <p>© 2026 TechNovaBD</p>
+    <p>যোগাযোগ করে অর্ডার সম্পর্কিত তথ্য জানতে পারবেন।</p>
 </footer>
-
 
 
 <script>
 
-
-/* =====================================
-   SUPABASE CONFIG
-===================================== */
-
 const SUPABASE_URL =
-"https://dcmeprqtygptljxjnbku.supabase.co";
-
+    "https://dcmeprqtygptljxjnbku.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_UQ_deuuX94nqT77envaRJg_VZXMhZqC";
+    "sb_publishable_UQ_deuuX94nqT77envaRJg_VZXMhZqC";
 
-
-
-/* =====================================
-   VARIABLES
-===================================== */
 
 let products = [];
 
 let cart = [];
 
+let total = 0;
 
 
-/* =====================================
+/* =========================
    LOAD PRODUCTS
-===================================== */
+========================= */
 
 async function loadProducts() {
 
-
-    const productList =
-        document.getElementById(
-            "productList"
-        );
-
-
-    productList.innerHTML = `
-
-        <p>
-            ⏳ Products loading...
-        </p>
-
-    `;
-
-
     try {
 
+        const response = await fetch(
+            SUPABASE_URL +
+            "/rest/v1/products?select=*&order=created_at.desc",
+            {
+                method: "GET",
 
-        const response =
-            await fetch(
-
-                SUPABASE_URL +
-                "/rest/v1/products?select=*&order=created_at.desc",
-
-                {
-
-                    method: "GET",
-
-                    headers: {
-
-                        "apikey":
-                            SUPABASE_KEY,
-
-                        "Authorization":
-                            "Bearer " + SUPABASE_KEY,
-
-                        "Content-Type":
-                            "application/json"
-
-                    }
-
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization":
+                        "Bearer " + SUPABASE_KEY
                 }
-
-            );
-
-
-
-        const data =
-            await response.json();
-
-
-
-        console.log(
-            "SUPABASE PRODUCTS:",
-            data
+            }
         );
-
-
 
         if (!response.ok) {
 
             throw new Error(
-
-                data.message ||
-                JSON.stringify(data)
-
+                "Product load failed"
             );
 
         }
 
+        products = await response.json();
 
-
-        products = data;
-
-
-
-        displayProducts();
-
+        displayProducts(products);
 
     }
 
     catch (error) {
 
+        console.error(error);
 
-        console.error(
-            "PRODUCT LOAD ERROR:",
-            error
-        );
-
-
-        productList.innerHTML = `
-
-            <div style="
-                padding:20px;
-                margin:15px 0;
-                background:#fee2e2;
-                color:#991b1b;
-                border-radius:10px;
-            ">
-
-                ❌ Product load করা যায়নি।
-
-                <br><br>
-
-                <strong>
-                    Error:
-                </strong>
-
-                <br>
-
-                ${escapeHtml(error.message)}
-
-            </div>
-
-        `;
+        document.getElementById("products").innerHTML =
+            '<div class="message">প্রোডাক্ট লোড করা যায়নি।</div>';
 
     }
 
 }
 
 
-
-/* =====================================
+/* =========================
    DISPLAY PRODUCTS
-===================================== */
+========================= */
 
-function displayProducts(
-    list = products
-) {
+function displayProducts(list) {
 
+    const container =
+        document.getElementById("products");
 
-    const productList =
-        document.getElementById(
-            "productList"
-        );
+    if (!list.length) {
 
-
-    productList.innerHTML = "";
-
-
-
-    if (
-        !list ||
-        list.length === 0
-    ) {
-
-
-        productList.innerHTML = `
-
-            <div style="
-                padding:20px;
-                text-align:center;
-            ">
-
-                🛍️ এখনো কোনো Product নেই।
-
-            </div>
-
-        `;
-
+        container.innerHTML =
+            '<div class="message">কোনো প্রোডাক্ট পাওয়া যায়নি।</div>';
 
         return;
-
     }
 
+    container.innerHTML = "";
 
+    list.forEach(product => {
 
-    list.forEach(
-        product => {
+        const image =
+            product.image ||
+            "https://via.placeholder.com/300";
 
+        const price =
+            Number(product.price) || 0;
 
-            const card =
-                document.createElement(
-                    "div"
-                );
+        container.innerHTML += `
 
-
-            card.className =
-                "product";
-
-
-
-            const image =
-                product.image ||
-                "https://via.placeholder.com/300?text=No+Image";
-
-
-
-            card.innerHTML = `
+            <div class="product">
 
                 <img
-
-                    src="${escapeHtml(image)}"
-
-                    alt="${escapeHtml(
-                        product.name || ""
-                    )}"
-
-                    onerror="
-                        this.src='https://via.placeholder.com/300?text=No+Image'
-                    "
-
+                    src="${image}"
+                    alt="${product.name || "Product"}"
+                    onerror="this.src='https://via.placeholder.com/300'"
                 >
-
-
 
                 <h3>
-
-                    ${escapeHtml(
-                        product.name || ""
-                    )}
-
+                    ${product.name || "Product"}
                 </h3>
 
-
+                <p>
+                    ${product.description || ""}
+                </p>
 
                 <div class="price">
-
-                    ৳${Number(
-                        product.price || 0
-                    )}
-
+                    ${price} টাকা
                 </div>
 
-
-
-                ${
-                    product.description
-                    ?
-                    `
-                    <p>
-                        ${escapeHtml(
-                            product.description
-                        )}
-                    </p>
-                    `
-                    :
-                    ""
-                }
-
-
-
                 <button
-                    onclick="
-                        addToCart(
-                            '${escapeJs(product.id)}'
-                        )
-                    "
+                    class="add-btn"
+                    onclick="addToCart(${product.id})"
                 >
-
-                    Add to Cart
-
+                    🛒 Cart-এ যোগ করুন
                 </button>
 
-            `;
+            </div>
 
+        `;
 
-
-            productList.appendChild(
-                card
-            );
-
-
-        }
-    );
+    });
 
 }
 
 
+/* =========================
+   SEARCH
+========================= */
 
-/* =====================================
+function searchProducts() {
+
+    const search =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const filtered =
+        products.filter(product =>
+
+            (product.name || "")
+            .toLowerCase()
+            .includes(search)
+
+        );
+
+    displayProducts(filtered);
+
+}
+
+
+/* =========================
    ADD TO CART
-===================================== */
+========================= */
 
 function addToCart(id) {
 
-
     const product =
-        products.find(
+        products.find(p => p.id === id);
 
-            p =>
-                String(p.id) ===
-                String(id)
-
-        );
-
-
-
-    if (!product) {
-
-
-        alert(
-            "Product পাওয়া যায়নি।"
-        );
-
-
-        return;
-
-    }
-
-
+    if (!product) return;
 
     const existing =
-        cart.find(
-
-            item =>
-                String(item.id) ===
-                String(id)
-
-        );
-
-
+        cart.find(item => item.id === id);
 
     if (existing) {
 
         existing.quantity++;
 
-    }
-
-    else {
-
+    } else {
 
         cart.push({
 
-            ...product,
+            id: product.id,
+
+            name: product.name,
+
+            price: Number(product.price),
 
             quantity: 1
 
@@ -801,832 +531,492 @@ function addToCart(id) {
 
     }
 
-
-
     updateCart();
-
-
-
-    alert(
-
-        product.name +
-        " Cart-এ যোগ হয়েছে!"
-
-    );
 
 }
 
 
-
-/* =====================================
+/* =========================
    UPDATE CART
-===================================== */
+========================= */
 
 function updateCart() {
 
+    const cartContainer =
+        document.getElementById("cartItems");
 
-    const count =
-        cart.reduce(
+    if (!cart.length) {
 
-            (total, item) =>
-                total + item.quantity,
+        cartContainer.innerHTML =
+            "<p>Cart খালি।</p>";
 
-            0
+        total = 0;
 
-        );
+        updateTotals();
 
-
-
-    document.getElementById(
-        "cartCount"
-    ).textContent =
-        count;
-
-}
-
-
-
-/* =====================================
-   OPEN CART
-===================================== */
-
-function openCart() {
-
-
-    document.getElementById(
-        "cartModal"
-    ).style.display =
-        "block";
-
-
-    displayCart();
-
-}
-
-
-
-/* =====================================
-   CLOSE CART
-===================================== */
-
-function closeCart() {
-
-
-    document.getElementById(
-        "cartModal"
-    ).style.display =
-        "none";
-
-}
-
-
-
-/* =====================================
-   DISPLAY CART
-===================================== */
-
-function displayCart() {
-
-
-    const cartItems =
-        document.getElementById(
-            "cartItems"
-        );
-
-
-    cartItems.innerHTML =
-        "";
-
-
-    let total = 0;
-
-
-
-    if (cart.length === 0) {
-
-
-        cartItems.innerHTML =
-            "<p>আপনার Cart খালি।</p>";
-
+        return;
     }
 
+    cartContainer.innerHTML = "";
 
+    total = 0;
 
-    cart.forEach(
-        item => {
+    cart.forEach(item => {
 
+        const itemTotal =
+            item.price * item.quantity;
 
-            const itemTotal =
-                Number(item.price) *
-                item.quantity;
+        total += itemTotal;
 
+        cartContainer.innerHTML += `
 
-            total +=
-                itemTotal;
+            <div class="cart-item">
 
-
-
-            cartItems.innerHTML += `
-
-                <div class="cart-item">
-
-                    <span>
-
-                        ${escapeHtml(
-                            item.name
-                        )}
-
-                        × ${item.quantity}
-
-                    </span>
-
+                <div>
 
                     <strong>
-
-                        ৳${itemTotal}
-
+                        ${item.name}
                     </strong>
+
+                    <br>
+
+                    ${item.price} টাকা ×
+                    ${item.quantity}
 
                 </div>
 
-            `;
+                <div class="qty">
 
+                    <button
+                        onclick="decreaseQuantity(${item.id})"
+                    >
+                        −
+                    </button>
 
-        }
-    );
+                    <button
+                        onclick="increaseQuantity(${item.id})"
+                    >
+                        +
+                    </button>
 
+                    <button
+                        onclick="removeFromCart(${item.id})"
+                    >
+                        ❌
+                    </button>
 
+                </div>
 
-    document.getElementById(
-        "cartTotal"
-    ).textContent =
+            </div>
+
+        `;
+
+    });
+
+    document.getElementById("cartTotal").textContent =
         total;
+
+    updateTotals();
 
 }
 
 
+/* =========================
+   INCREASE QUANTITY
+========================= */
 
-/* =====================================
-   CHECKOUT
-===================================== */
+function increaseQuantity(id) {
 
-function checkout() {
+    const item =
+        cart.find(item => item.id === id);
+
+    if (item) {
+
+        item.quantity++;
+
+        updateCart();
+
+    }
+
+}
 
 
-    if (cart.length === 0) {
+/* =========================
+   DECREASE QUANTITY
+========================= */
 
+function decreaseQuantity(id) {
+
+    const item =
+        cart.find(item => item.id === id);
+
+    if (!item) return;
+
+    if (item.quantity > 1) {
+
+        item.quantity--;
+
+    } else {
+
+        cart =
+            cart.filter(item => item.id !== id);
+
+    }
+
+    updateCart();
+
+}
+
+
+/* =========================
+   REMOVE FROM CART
+========================= */
+
+function removeFromCart(id) {
+
+    cart =
+        cart.filter(item => item.id !== id);
+
+    updateCart();
+
+}
+
+
+/* =========================
+   DELIVERY CHARGE
+========================= */
+
+function getDeliveryCharge() {
+
+    const division =
+        document.getElementById("division").value;
+
+    /*
+       ঢাকা = 60 টাকা
+       অন্যান্য বিভাগ = 130 টাকা
+    */
+
+    if (division === "ঢাকা") {
+
+        return 60;
+
+    }
+
+    if (division !== "") {
+
+        return 130;
+
+    }
+
+    return 0;
+
+}
+
+
+/* =========================
+   UPDATE TOTAL
+========================= */
+
+function updateDeliveryCharge() {
+
+    updateTotals();
+
+}
+
+
+function updateTotals() {
+
+    const deliveryCharge =
+        getDeliveryCharge();
+
+    const grandTotal =
+        total + deliveryCharge;
+
+    document.getElementById("productTotal").textContent =
+        total;
+
+    document.getElementById("deliveryCharge").textContent =
+        deliveryCharge;
+
+    document.getElementById("grandTotal").textContent =
+        grandTotal;
+
+}
+
+
+/* =========================
+   PLACE ORDER
+========================= */
+
+async function placeOrder() {
+
+    if (!cart.length) {
 
         alert(
-            "আপনার Cart খালি!"
+            "আগে Cart-এ কোনো প্রোডাক্ট যোগ করুন।"
         );
-
 
         return;
 
     }
 
 
-
-    closeCart();
-
-
-
-    document.getElementById(
-        "orderModal"
-    ).style.display =
-        "block";
-
-
-
-    displayOrderSummary();
-
-}
-
-
-
-/* =====================================
-   ORDER SUMMARY
-===================================== */
-
-function displayOrderSummary() {
-
-
-    const summary =
-        document.getElementById(
-            "orderSummary"
-        );
-
-
-    summary.innerHTML =
-        "";
-
-
-    let total = 0;
-
-
-
-    cart.forEach(
-        item => {
-
-
-            const itemTotal =
-                Number(item.price) *
-                item.quantity;
-
-
-            total +=
-                itemTotal;
-
-
-
-            summary.innerHTML += `
-
-                <p>
-
-                    ${escapeHtml(
-                        item.name
-                    )}
-
-                    × ${item.quantity}
-
-                    — ৳${itemTotal}
-
-                </p>
-
-            `;
-
-
-        }
-    );
-
-
-
-    document.getElementById(
-        "orderTotal"
-    ).textContent =
-        total;
-
-}
-
-
-
-/* =====================================
-   CLOSE ORDER
-===================================== */
-
-function closeOrder() {
-
-
-    document.getElementById(
-        "orderModal"
-    ).style.display =
-        "none";
-
-}
-
-
-
-/* =====================================
-   SEARCH
-===================================== */
-
-function searchProducts() {
-
-
-    const search =
-        document.getElementById(
-            "search"
-        ).value
-        .toLowerCase()
+    const name =
+        document
+        .getElementById("customerName")
+        .value
         .trim();
 
 
+    const phone =
+        document
+        .getElementById("phone")
+        .value
+        .trim();
 
-    const result =
-        products.filter(
 
-            product =>
+    const division =
+        document
+        .getElementById("division")
+        .value;
 
-                String(
-                    product.name || ""
-                )
-                .toLowerCase()
-                .includes(search)
 
+    const district =
+        document
+        .getElementById("district")
+        .value
+        .trim();
+
+
+    const upazila =
+        document
+        .getElementById("upazila")
+        .value
+        .trim();
+
+
+    const village =
+        document
+        .getElementById("village")
+        .value
+        .trim();
+
+
+    const detailsAddress =
+        document
+        .getElementById("detailsAddress")
+        .value
+        .trim();
+
+
+    if (
+        !name ||
+        !phone ||
+        !division ||
+        !district ||
+        !upazila ||
+        !village ||
+        !detailsAddress
+    ) {
+
+        alert(
+            "সব তথ্য পূরণ করুন।"
         );
 
+        return;
+
+    }
 
 
-    displayProducts(
-        result
-    );
-
-}
+    const deliveryCharge =
+        getDeliveryCharge();
 
 
-
-/* =====================================
-   SCROLL
-===================================== */
-
-function scrollToProducts() {
+    const grandTotal =
+        total + deliveryCharge;
 
 
-    document.getElementById(
-        "products"
-    ).scrollIntoView({
+    const orderData = {
 
-        behavior:
-            "smooth"
+        order_id:
+            "TN" + Date.now(),
 
-    });
+        customer_name:
+            name,
 
-}
+        phone:
+            phone,
+
+        division:
+            division,
+
+        district:
+            district,
+
+        upazila:
+            upazila,
+
+        village:
+            village,
+
+        details_address:
+            detailsAddress,
+
+        products:
+            cart.map(item => ({
+
+                name:
+                    item.name,
+
+                quantity:
+                    item.quantity,
+
+                price:
+                    Number(item.price)
+
+            })),
+
+        total:
+            grandTotal,
+
+        status:
+            "Pending"
+
+    };
 
 
+    const message =
+        document.getElementById(
+            "orderMessage"
+        );
 
-/* =====================================
-   SUBMIT ORDER
-===================================== */
-
-document
-.getElementById("orderForm")
-.addEventListener(
-    "submit",
-    async function(e) {
+    message.innerHTML =
+        "অর্ডার পাঠানো হচ্ছে...";
 
 
-        e.preventDefault();
+    try {
 
+        const response =
+            await fetch(
 
+                SUPABASE_URL +
+                "/rest/v1/orders",
 
-        if (cart.length === 0) {
+                {
 
+                    method: "POST",
 
-            alert(
-                "Cart খালি!"
+                    headers: {
+
+                        "apikey":
+                            SUPABASE_KEY,
+
+                        "Authorization":
+                            "Bearer " +
+                            SUPABASE_KEY,
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Prefer":
+                            "return=minimal"
+
+                    },
+
+                    body:
+                        JSON.stringify(orderData)
+
+                }
+
             );
 
 
-            return;
+        if (!response.ok) {
 
-        }
-
-
-
-        /* NAME */
-
-        const name =
-            document.getElementById(
-                "customerName"
-            ).value.trim();
-
-
-
-        /* PHONE */
-
-        const phone =
-            document.getElementById(
-                "customerPhone"
-            ).value.trim();
-
-
-
-        /* ADDRESS */
-
-        const division =
-            document.getElementById(
-                "division"
-            ).value.trim();
-
-
-        const district =
-            document.getElementById(
-                "district"
-            ).value.trim();
-
-
-        const upazila =
-            document.getElementById(
-                "upazila"
-            ).value.trim();
-
-
-        const village =
-            document.getElementById(
-                "village"
-            ).value.trim();
-
-
-        const detailsAddress =
-            document.getElementById(
-                "detailsAddress"
-            ).value.trim();
-
-
-
-        /* TOTAL */
-
-        let total = 0;
-
-
-        cart.forEach(
-            item => {
-
-                total +=
-                    Number(item.price) *
-                    item.quantity;
-
-            }
-        );
-
-
-
-        /* ORDER */
-
-        const order = {
-
-
-            order_id:
-                "TN" +
-                Date.now(),
-
-
-
-            customer_name:
-                name,
-
-
-
-            phone:
-                phone,
-
-
-
-            division:
-                division,
-
-
-
-            district:
-                district,
-
-
-
-            upazila:
-                upazila,
-
-
-
-            village:
-                village,
-
-
-
-            details_address:
-                detailsAddress,
-
-
-
-            products:
-                cart.map(
-                    item => ({
-
-                        name:
-                            item.name,
-
-                        quantity:
-                            item.quantity,
-
-                        price:
-                            Number(
-                                item.price
-                            )
-
-                    })
-                ),
-
-
-
-            total:
-                total,
-
-
-
-            status:
-                "Pending"
-
-        };
-
-
-
-        const message =
-            document.getElementById(
-                "orderMessage"
-            );
-
-
-
-        message.innerHTML =
-            "⏳ অর্ডার পাঠানো হচ্ছে...";
-
-
-
-        try {
-
-
-            const response =
-                await fetch(
-
-                    SUPABASE_URL +
-                    "/rest/v1/orders",
-
-                    {
-
-                        method:
-                            "POST",
-
-
-
-                        headers: {
-
-                            "Content-Type":
-                                "application/json",
-
-
-                            "apikey":
-                                SUPABASE_KEY,
-
-
-                            "Authorization":
-                                "Bearer " +
-                                SUPABASE_KEY,
-
-
-                            "Prefer":
-                                "return=minimal"
-
-                        },
-
-
-
-                        body:
-                            JSON.stringify(
-                                order
-                            )
-
-                    }
-
-                );
-
-
-
-            const result =
+            const error =
                 await response.text();
 
+            console.error(error);
 
-
-            console.log(
-                "ORDER RESULT:",
-                result
+            throw new Error(
+                "Order failed"
             );
-
-
-
-            if (!response.ok) {
-
-
-                throw new Error(
-                    result
-                );
-
-            }
-
-
-
-            message.innerHTML = `
-
-                <div style="
-                    margin-top:15px;
-                    padding:15px;
-                    background:#dcfce7;
-                    border-radius:8px;
-                    text-align:center;
-                ">
-
-                    ✅ আপনার অর্ডার সফল হয়েছে!
-
-                    <br><br>
-
-                    Order ID:
-
-                    <strong>
-                        ${order.order_id}
-                    </strong>
-
-                    <br><br>
-
-                    মোট:
-
-                    <strong>
-                        ৳${order.total}
-                    </strong>
-
-                </div>
-
-            `;
-
-
-
-            cart = [];
-
-
-
-            updateCart();
-
-
-
-            document
-            .getElementById(
-                "orderForm"
-            )
-            .reset();
-
 
         }
 
-        catch(error) {
+
+        message.innerHTML = `
+            <div style="color:green;">
+                ✅ আপনার অর্ডার সফলভাবে গ্রহণ করা হয়েছে!
+                <br>
+                মোট: ${grandTotal} টাকা
+            </div>
+        `;
 
 
-            console.error(
-                "ORDER ERROR:",
-                error
-            );
+        cart = [];
+
+        updateCart();
 
 
+        document
+            .getElementById("customerName")
+            .value = "";
 
-            message.innerHTML = `
+        document
+            .getElementById("phone")
+            .value = "";
 
-                <div style="
-                    margin-top:15px;
-                    padding:15px;
-                    background:#fee2e2;
-                    color:#991b1b;
-                    border-radius:8px;
-                ">
+        document
+            .getElementById("division")
+            .value = "";
 
-                    ❌ অর্ডার পাঠানো যায়নি।
+        document
+            .getElementById("district")
+            .value = "";
 
-                    <br><br>
+        document
+            .getElementById("upazila")
+            .value = "";
 
-                    ${escapeHtml(
-                        error.message
-                    )}
+        document
+            .getElementById("village")
+            .value = "";
 
-                </div>
-
-            `;
-
-        }
-
-    }
-);
-
-
-
-/* =====================================
-   CLOSE MODAL
-===================================== */
-
-window.onclick =
-function(event) {
+        document
+            .getElementById("detailsAddress")
+            .value = "";
 
 
-    const cartModal =
-        document.getElementById(
-            "cartModal"
-        );
-
-
-    const orderModal =
-        document.getElementById(
-            "orderModal"
-        );
-
-
-
-    if (
-        event.target ===
-        cartModal
-    ) {
-
-        closeCart();
+        updateTotals();
 
     }
 
+    catch (error) {
 
+        console.error(error);
 
-    if (
-        event.target ===
-        orderModal
-    ) {
-
-        closeOrder();
+        message.innerHTML = `
+            <div style="color:red;">
+                ❌ অর্ডার পাঠানো যায়নি।
+                আবার চেষ্টা করুন।
+            </div>
+        `;
 
     }
-
-};
-
-
-
-/* =====================================
-   SECURITY
-===================================== */
-
-function escapeHtml(value) {
-
-
-    return String(
-        value ?? ""
-    )
-
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-
-    .replace(
-        /</g,
-        "&lt;"
-    )
-
-    .replace(
-        />/g,
-        "&gt;"
-    )
-
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-
-    .replace(
-        /'/g,
-        "&#039;"
-    );
 
 }
 
 
-
-function escapeJs(value) {
-
-
-    return String(
-        value ?? ""
-    )
-
-    .replace(
-        /\\/g,
-        "\\\\"
-    )
-
-    .replace(
-        /'/g,
-        "\\'"
-    )
-
-    .replace(
-        /"/g,
-        '\\"'
-    )
-
-    .replace(
-        /\n/g,
-        "\\n"
-    )
-
-    .replace(
-        /\r/g,
-        "\\r"
-    );
-
-}
-
-
-
-/* =====================================
+/* =========================
    START
-===================================== */
+========================= */
 
 loadProducts();
 
-updateCart();
-
+updateTotals();
 
 </script>
 
-
 </body>
-
 </html>
