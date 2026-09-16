@@ -2,24 +2,17 @@
 <html lang="bn">
 
 <head>
-
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>TechNovaBD - Online Shop</title>
 
-    <link
-        rel="stylesheet"
-        href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
-
 
 <!-- =========================
      HEADER
@@ -31,55 +24,27 @@
         TechNovaBD
     </div>
 
-
     <nav>
-
-        <a href="#home">
-            Home
-        </a>
-
-        <a href="#products">
-            Products
-        </a>
-
-        <a href="#order">
-            Order
-        </a>
-
-        <a href="#tracking">
-            Tracking
-        </a>
-
-        <a href="#contact">
-            Contact
-        </a>
-
+        <a href="#home">Home</a>
+        <a href="#products">Products</a>
+        <a href="#order">Order</a>
+        <a href="#tracking">Tracking</a>
+        <a href="#contact">Contact</a>
     </nav>
 
-
-    <button
-        class="cart-btn"
-        onclick="openCart()">
-
+    <button class="cart-btn" onclick="openCart()">
         🛒 Cart
-
-        <span id="cartCount">
-            0
-        </span>
-
+        <span id="cartCount">0</span>
     </button>
 
 </header>
-
 
 
 <!-- =========================
      HOME
 ========================= -->
 
-<section
-    id="home"
-    class="hero">
+<section id="home" class="hero">
 
     <h1>
         Welcome to TechNovaBD
@@ -89,15 +54,11 @@
         আপনার প্রয়োজনীয় Technology Products এক জায়গায়
     </p>
 
-    <button
-        onclick="scrollToProducts()">
-
+    <button onclick="scrollToProducts()">
         Shop Now
-
     </button>
 
 </section>
-
 
 
 <!-- =========================
@@ -110,7 +71,6 @@
         Our Products
     </h2>
 
-
     <div class="search-box">
 
         <input
@@ -121,58 +81,48 @@
 
     </div>
 
-
     <div
         id="productList"
         class="products">
+
+        <p style="
+            width:100%;
+            text-align:center;
+            padding:30px;
+        ">
+            🔄 পণ্য লোড হচ্ছে...
+        </p>
 
     </div>
 
 </section>
 
 
-
 <!-- =========================
      CART
 ========================= -->
 
-<div
-    id="cartModal"
-    class="modal">
-
+<div id="cartModal" class="modal">
 
     <div class="modal-content">
-
 
         <span
             class="close"
             onclick="closeCart()">
-
             ×
-
         </span>
-
 
         <h2>
             🛒 আপনার Cart
         </h2>
 
-
         <div id="cartItems">
-
         </div>
 
-
         <h3>
-
             পণ্যের মোট:
-
-            ৳<span id="cartTotal">
-                0
-            </span>
-
+            ৳<span id="cartTotal">0</span>
         </h3>
-
 
         <button
             onclick="checkout()"
@@ -182,34 +132,25 @@
 
         </button>
 
-
     </div>
 
 </div>
-
 
 
 <!-- =========================
      ORDER FORM
 ========================= -->
 
-<section
-    id="order"
-    class="contact">
-
+<section id="order" class="contact">
 
     <h2>
         📦 অর্ডার করুন
     </h2>
 
-
     <p>
         আপনার তথ্য দিয়ে অর্ডারটি সম্পন্ন করুন।
     </p>
 
-
-
-    <!-- CUSTOMER NAME -->
 
     <label>
         আপনার নাম
@@ -222,9 +163,6 @@
         required>
 
 
-
-    <!-- PHONE -->
-
     <label>
         মোবাইল নম্বর
     </label>
@@ -236,9 +174,6 @@
         maxlength="11"
         required>
 
-
-
-    <!-- DIVISION -->
 
     <label>
         বিভাগ
@@ -285,9 +220,6 @@
     </select>
 
 
-
-    <!-- DISTRICT -->
-
     <label>
         জেলা
     </label>
@@ -298,9 +230,6 @@
         placeholder="আপনার জেলার নাম"
         required>
 
-
-
-    <!-- UPAZILA -->
 
     <label>
         উপজেলা / থানা
@@ -313,9 +242,6 @@
         required>
 
 
-
-    <!-- VILLAGE -->
-
     <label>
         গ্রাম / এলাকা
     </label>
@@ -327,9 +253,6 @@
         required>
 
 
-
-    <!-- DETAILS ADDRESS -->
-
     <label>
         বিস্তারিত ঠিকানা
     </label>
@@ -338,9 +261,7 @@
         id="detailsAddress"
         placeholder="বাড়ি নম্বর, রোড, মার্কেট ইত্যাদি লিখুন"
         rows="4"
-        required>
-    </textarea>
-
+        required></textarea>
 
 
     <!-- ORDER SUMMARY -->
@@ -362,44 +283,23 @@
             Cart থেকে পণ্য নির্বাচন করুন।
         </div>
 
-
         <p>
-
             পণ্যের মোট:
-
-            ৳<span id="productTotal">
-                0
-            </span>
-
+            ৳<span id="productTotal">0</span>
         </p>
-
 
         <p>
-
             🚚 Delivery Charge:
-
-            ৳<span id="deliveryCharge">
-                0
-            </span>
-
+            ৳<span id="deliveryCharge">0</span>
         </p>
-
 
         <h3>
-
             💰 সর্বমোট:
-
-            ৳<span id="grandTotal">
-                0
-            </span>
-
+            ৳<span id="grandTotal">0</span>
         </h3>
 
     </div>
 
-
-
-    <!-- PLACE ORDER -->
 
     <button
         onclick="placeOrder()"
@@ -415,128 +315,83 @@
 
     </button>
 
-
 </section>
-
 
 
 <!-- =========================
      ORDER TRACKING
 ========================= -->
 
-<section
-    id="tracking"
-    class="contact">
-
+<section id="tracking" class="contact">
 
     <h2>
         🔎 Order Tracking
     </h2>
 
-
     <p>
         আপনার Order ID দিয়ে অর্ডারের বর্তমান অবস্থা দেখুন।
     </p>
-
 
     <input
         type="text"
         id="trackingOrderId"
         placeholder="Order ID লিখুন">
 
-
-    <button
-        onclick="trackOrder()">
-
+    <button onclick="trackOrder()">
         🔎 Track Order
-
     </button>
-
 
     <div
         id="trackingResult"
         style="margin-top:20px;">
-
     </div>
 
 </section>
-
 
 
 <!-- =========================
      CONTACT
 ========================= -->
 
-<section
-    id="contact"
-    class="contact">
-
+<section id="contact" class="contact">
 
     <h2>
         📞 Contact Us
     </h2>
 
-
     <p>
-
         📱 WhatsApp 1:
-
         <a
             href="https://wa.me/8801759748984"
             target="_blank">
-
             01759748984
-
         </a>
-
     </p>
 
-
     <p>
-
         📱 WhatsApp 2:
-
         <a
             href="https://wa.me/8801777556984"
             target="_blank">
-
             01777556984
-
         </a>
-
     </p>
 
-
     <p>
-
         📧 Gmail 1:
-
-        <a
-            href="mailto:mdnirob748984@gmail.com">
-
+        <a href="mailto:mdnirob748984@gmail.com">
             mdnirob748984@gmail.com
-
         </a>
-
     </p>
-
 
     <p>
-
         📧 Gmail 2:
-
-        <a
-            href="mailto:technovabd779@gmail.com">
-
+        <a href="mailto:technovabd779@gmail.com">
             technovabd779@gmail.com
-
         </a>
-
     </p>
-
 
 </section>
-
 
 
 <!-- =========================
@@ -552,55 +407,746 @@
 </footer>
 
 
-
 <!-- =========================
-     SUPABASE
+     SUPABASE LIBRARY
 ========================= -->
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
 
-
-/* SUPABASE */
+/* =========================================
+   SUPABASE
+========================================= */
 
 const SUPABASE_URL =
     "https://dcmeprqtygptljxjnbku.supabase.co";
 
-
 const SUPABASE_KEY =
     "sb_publishable_UQ_deuuX94nqT77envaRJg_VZXMhZqC";
 
-
-const supabaseClient =
+const shopSupabase =
     window.supabase.createClient(
         SUPABASE_URL,
         SUPABASE_KEY
     );
 
 
+/* =========================================
+   VARIABLES
+========================================= */
 
-/* =========================
-   ORDER SUMMARY
-========================= */
+let products = [];
+let cart = [];
 
-function updateOrderSummary() {
 
-    if (typeof cart === "undefined") {
+/* =========================================
+   LOAD PRODUCTS
+========================================= */
+
+async function loadProducts() {
+
+    const box =
+        document.getElementById("productList");
+
+    if (!box) return;
+
+
+    box.innerHTML = `
+        <p style="
+            width:100%;
+            text-align:center;
+            padding:30px;
+        ">
+            🔄 পণ্য লোড হচ্ছে...
+        </p>
+    `;
+
+
+    try {
+
+        const result =
+            await fetch(
+                SUPABASE_URL +
+                "/rest/v1/products?select=id,name,price,image&order=id.desc",
+                {
+                    method: "GET",
+
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Authorization":
+                            "Bearer " + SUPABASE_KEY
+                    }
+                }
+            );
+
+
+        const data =
+            await result.json();
+
+
+        console.log(
+            "TechNovaBD Products:",
+            data
+        );
+
+
+        if (!result.ok) {
+
+            box.innerHTML = `
+                <div style="
+                    width:100%;
+                    text-align:center;
+                    padding:30px;
+                    color:red;
+                ">
+
+                    <h3>
+                        ❌ পণ্য লোড করা যায়নি
+                    </h3>
+
+                    <p>
+                        ${data.message || JSON.stringify(data)}
+                    </p>
+
+                </div>
+            `;
+
+            return;
+        }
+
+
+        if (
+            !Array.isArray(data) ||
+            data.length === 0
+        ) {
+
+            box.innerHTML = `
+                <div style="
+                    width:100%;
+                    text-align:center;
+                    padding:30px;
+                ">
+
+                    📦 বর্তমানে কোনো পণ্য নেই।
+
+                </div>
+            `;
+
+            return;
+        }
+
+
+        products = data;
+
+
+        displayProducts(products);
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Product Error:",
+            error
+        );
+
+
+        box.innerHTML = `
+            <div style="
+                width:100%;
+                text-align:center;
+                padding:30px;
+                color:red;
+            ">
+
+                <h3>
+                    ❌ Connection Error
+                </h3>
+
+                <p>
+                    ${error.message}
+                </p>
+
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* =========================================
+   DISPLAY PRODUCTS
+========================================= */
+
+function displayProducts(list) {
+
+    const box =
+        document.getElementById("productList");
+
+    if (!box) return;
+
+
+    box.innerHTML = "";
+
+
+    if (!list || list.length === 0) {
+
+        box.innerHTML = `
+            <p style="
+                width:100%;
+                text-align:center;
+                padding:30px;
+            ">
+                📦 কোনো পণ্য পাওয়া যায়নি।
+            </p>
+        `;
+
         return;
     }
 
 
+    list.forEach(function(product) {
+
+        const id =
+            product.id;
+
+        const name =
+            product.name || "Product";
+
+        const price =
+            Number(product.price) || 0;
+
+        const image =
+            product.image ||
+            "https://via.placeholder.com/300";
+
+
+        box.innerHTML += `
+
+            <div class="product">
+
+                <img
+                    src="${image}"
+                    alt="${name}"
+                    onerror="
+                        this.onerror=null;
+                        this.src='https://via.placeholder.com/300';
+                    "
+                >
+
+                <h3>
+                    ${name}
+                </h3>
+
+                <div class="price">
+                    ৳${price}
+                </div>
+
+                <div class="product-buttons">
+
+                    <button
+                        type="button"
+                        onclick="addToCart('${id}')">
+
+                        🛒 Add to Cart
+
+                    </button>
+
+                    <button
+                        type="button"
+                        onclick="buyNow('${id}')">
+
+                        ⚡ Buy Now
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+function searchProducts() {
+
+    const input =
+        document.getElementById("search");
+
+    if (!input) return;
+
+
+    const text =
+        input.value
+            .toLowerCase()
+            .trim();
+
+
+    const result =
+        products.filter(function(product) {
+
+            return String(
+                product.name || ""
+            )
+            .toLowerCase()
+            .includes(text);
+
+        });
+
+
+    displayProducts(result);
+
+}
+
+
+/* =========================================
+   ADD TO CART
+========================================= */
+
+function addToCart(id) {
+
+    const product =
+        products.find(function(p) {
+
+            return String(p.id) ===
+                   String(id);
+
+        });
+
+
+    if (!product) {
+
+        alert(
+            "❌ Product পাওয়া যায়নি।"
+        );
+
+        return;
+    }
+
+
+    const existing =
+        cart.find(function(item) {
+
+            return String(item.id) ===
+                   String(id);
+
+        });
+
+
+    if (existing) {
+
+        existing.quantity++;
+
+    } else {
+
+        cart.push({
+
+            ...product,
+
+            quantity: 1
+
+        });
+
+    }
+
+
+    updateCart();
+
+    displayCart();
+
+    updateOrderSummary();
+
+
+    alert(
+        product.name +
+        " Cart-এ যোগ হয়েছে!"
+    );
+
+}
+
+
+/* =========================================
+   BUY NOW
+========================================= */
+
+function buyNow(id) {
+
+    const product =
+        products.find(function(p) {
+
+            return String(p.id) ===
+                   String(id);
+
+        });
+
+
+    if (!product) {
+
+        alert(
+            "❌ Product পাওয়া যায়নি।"
+        );
+
+        return;
+    }
+
+
+    cart = [
+
+        {
+            ...product,
+            quantity: 1
+        }
+
+    ];
+
+
+    updateCart();
+
+    displayCart();
+
+    updateOrderSummary();
+
+
+    const order =
+        document.getElementById("order");
+
+
+    if (order) {
+
+        order.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+}
+
+
+/* =========================================
+   CART COUNT
+========================================= */
+
+function updateCart() {
+
+    const count =
+        cart.reduce(
+            function(total, item) {
+
+                return total +
+                    Number(item.quantity || 0);
+
+            },
+            0
+        );
+
+
+    const cartCount =
+        document.getElementById(
+            "cartCount"
+        );
+
+
+    if (cartCount) {
+
+        cartCount.textContent =
+            count;
+
+    }
+
+}
+
+
+/* =========================================
+   OPEN CART
+========================================= */
+
+function openCart() {
+
+    const modal =
+        document.getElementById(
+            "cartModal"
+        );
+
+
+    if (modal) {
+
+        modal.style.display =
+            "block";
+
+    }
+
+
+    displayCart();
+
+}
+
+
+/* =========================================
+   CLOSE CART
+========================================= */
+
+function closeCart() {
+
+    const modal =
+        document.getElementById(
+            "cartModal"
+        );
+
+
+    if (modal) {
+
+        modal.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =========================================
+   DISPLAY CART
+========================================= */
+
+function displayCart() {
+
+    const box =
+        document.getElementById(
+            "cartItems"
+        );
+
+    const totalBox =
+        document.getElementById(
+            "cartTotal"
+        );
+
+
+    if (!box) return;
+
+
+    box.innerHTML = "";
+
+
+    let total = 0;
+
+
+    if (cart.length === 0) {
+
+        box.innerHTML =
+            "<p>আপনার Cart খালি।</p>";
+
+
+        if (totalBox) {
+
+            totalBox.textContent =
+                "0";
+
+        }
+
+        return;
+    }
+
+
+    cart.forEach(function(item) {
+
+        const price =
+            Number(item.price) || 0;
+
+        const quantity =
+            Number(item.quantity) || 1;
+
+        const itemTotal =
+            price * quantity;
+
+
+        total += itemTotal;
+
+
+        box.innerHTML += `
+
+            <div
+                class="cart-item"
+                style="
+                    margin-bottom:15px;
+                    padding:12px;
+                    border-bottom:1px solid #ddd;
+                "
+            >
+
+                <strong>
+                    ${item.name}
+                </strong>
+
+                <br>
+
+                ৳${price}
+                ×
+                ${quantity}
+
+                =
+                <strong>
+                    ৳${itemTotal}
+                </strong>
+
+                <div style="
+                    margin-top:8px;
+                ">
+
+                    <button
+                        onclick="decreaseQuantity('${item.id}')">
+                        −
+                    </button>
+
+                    <button
+                        onclick="increaseQuantity('${item.id}')">
+                        +
+                    </button>
+
+                    <button
+                        onclick="removeFromCart('${item.id}')">
+                        🗑️ Remove
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    if (totalBox) {
+
+        totalBox.textContent =
+            total;
+
+    }
+
+}
+
+
+/* =========================================
+   INCREASE
+========================================= */
+
+function increaseQuantity(id) {
+
+    const item =
+        cart.find(function(item) {
+
+            return String(item.id) ===
+                   String(id);
+
+        });
+
+
+    if (!item) return;
+
+
+    item.quantity++;
+
+
+    updateCart();
+
+    displayCart();
+
+    updateOrderSummary();
+
+}
+
+
+/* =========================================
+   DECREASE
+========================================= */
+
+function decreaseQuantity(id) {
+
+    const item =
+        cart.find(function(item) {
+
+            return String(item.id) ===
+                   String(id);
+
+        });
+
+
+    if (!item) return;
+
+
+    if (item.quantity > 1) {
+
+        item.quantity--;
+
+    } else {
+
+        cart =
+            cart.filter(function(item) {
+
+                return String(item.id) !==
+                       String(id);
+
+            });
+
+    }
+
+
+    updateCart();
+
+    displayCart();
+
+    updateOrderSummary();
+
+}
+
+
+/* =========================================
+   REMOVE
+========================================= */
+
+function removeFromCart(id) {
+
+    cart =
+        cart.filter(function(item) {
+
+            return String(item.id) !==
+                   String(id);
+
+        });
+
+
+    updateCart();
+
+    displayCart();
+
+    updateOrderSummary();
+
+}
+
+
+/* =========================================
+   ORDER SUMMARY
+========================================= */
+
+function updateOrderSummary() {
+
     let productTotal = 0;
 
 
-    cart.forEach(item => {
+    cart.forEach(function(item) {
 
         productTotal +=
-            Number(item.price) *
-            Number(item.quantity);
+            Number(item.price || 0) *
+            Number(item.quantity || 0);
 
     });
 
@@ -608,7 +1154,13 @@ function updateOrderSummary() {
     const division =
         document.getElementById(
             "division"
-        ).value;
+        );
+
+
+    const divisionValue =
+        division
+            ? division.value
+            : "";
 
 
     let deliveryCharge = 0;
@@ -616,15 +1168,10 @@ function updateOrderSummary() {
 
     if (cart.length > 0) {
 
-        if (division === "Dhaka") {
-
-            deliveryCharge = 60;
-
-        } else {
-
-            deliveryCharge = 130;
-
-        }
+        deliveryCharge =
+            divisionValue === "Dhaka"
+                ? 60
+                : 130;
 
     }
 
@@ -634,22 +1181,44 @@ function updateOrderSummary() {
         deliveryCharge;
 
 
-    document.getElementById(
-        "productTotal"
-    ).textContent =
-        productTotal;
+    const productTotalBox =
+        document.getElementById(
+            "productTotal"
+        );
+
+    const deliveryBox =
+        document.getElementById(
+            "deliveryCharge"
+        );
+
+    const grandTotalBox =
+        document.getElementById(
+            "grandTotal"
+        );
 
 
-    document.getElementById(
-        "deliveryCharge"
-    ).textContent =
-        deliveryCharge;
+    if (productTotalBox) {
+
+        productTotalBox.textContent =
+            productTotal;
+
+    }
 
 
-    document.getElementById(
-        "grandTotal"
-    ).textContent =
-        grandTotal;
+    if (deliveryBox) {
+
+        deliveryBox.textContent =
+            deliveryCharge;
+
+    }
+
+
+    if (grandTotalBox) {
+
+        grandTotalBox.textContent =
+            grandTotal;
+
+    }
 
 
     const productsBox =
@@ -658,10 +1227,13 @@ function updateOrderSummary() {
         );
 
 
+    if (!productsBox) return;
+
+
     if (cart.length === 0) {
 
         productsBox.innerHTML =
-            "Cart থেকে পণ্য নির্বাচন করুন।";
+            "Cart থেকে পণ্য নির্বাচন করুন.";
 
         return;
 
@@ -671,7 +1243,7 @@ function updateOrderSummary() {
     productsBox.innerHTML = "";
 
 
-    cart.forEach(item => {
+    cart.forEach(function(item) {
 
         productsBox.innerHTML += `
 
@@ -679,7 +1251,8 @@ function updateOrderSummary() {
                 ${item.name}
                 × ${item.quantity}
                 =
-                ৳${item.price * item.quantity}
+                ৳${Number(item.price) *
+                   Number(item.quantity)}
             </p>
 
         `;
@@ -689,50 +1262,55 @@ function updateOrderSummary() {
 }
 
 
+/* =========================================
+   CHECKOUT
+========================================= */
 
-/* Division change */
+function checkout() {
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
+    if (cart.length === 0) {
 
-        const division =
-            document.getElementById(
-                "division"
-            );
+        alert(
+            "⚠️ আপনার Cart খালি!"
+        );
 
-        if (division) {
+        return;
+    }
 
-            division.addEventListener(
-                "change",
-                updateOrderSummary
-            );
 
-        }
+    closeCart();
+
+    updateOrderSummary();
+
+
+    const order =
+        document.getElementById("order");
+
+
+    if (order) {
+
+        order.scrollIntoView({
+            behavior: "smooth"
+        });
 
     }
-);
+
+}
 
 
-
-/* =========================
+/* =========================================
    PLACE ORDER
-========================= */
+========================================= */
 
 async function placeOrder() {
 
-
-    if (
-        typeof cart === "undefined" ||
-        cart.length === 0
-    ) {
+    if (cart.length === 0) {
 
         alert(
             "⚠️ আগে Cart-এ পণ্য যোগ করুন।"
         );
 
         return;
-
     }
 
 
@@ -778,7 +1356,6 @@ async function placeOrder() {
         ).value.trim();
 
 
-
     if (
         !name ||
         !phone ||
@@ -794,9 +1371,7 @@ async function placeOrder() {
         );
 
         return;
-
     }
-
 
 
     if (
@@ -808,27 +1383,24 @@ async function placeOrder() {
         );
 
         return;
-
     }
-
 
 
     let productTotal = 0;
 
 
     const orderProducts =
-        cart.map(item => {
+        cart.map(function(item) {
 
-            const itemPrice =
-                Number(item.price);
-
+            const price =
+                Number(item.price || 0);
 
             const quantity =
-                Number(item.quantity);
+                Number(item.quantity || 1);
 
 
             productTotal +=
-                itemPrice * quantity;
+                price * quantity;
 
 
             return {
@@ -837,19 +1409,17 @@ async function placeOrder() {
 
                 quantity: quantity,
 
-                price: itemPrice
+                price: price
 
             };
 
         });
 
 
-
-    let deliveryCharge =
+    const deliveryCharge =
         division === "Dhaka"
             ? 60
             : 130;
-
 
 
     const grandTotal =
@@ -857,11 +1427,8 @@ async function placeOrder() {
         deliveryCharge;
 
 
-
     const orderId =
-        "TN" +
-        Date.now();
-
+        "TN" + Date.now();
 
 
     const orderData = {
@@ -895,32 +1462,28 @@ async function placeOrder() {
     };
 
 
-
     const {
-        data,
         error
-    } = await supabaseClient
+    } = await shopSupabase
         .from("orders")
-        .insert([orderData])
-        .select();
-
+        .insert([orderData]);
 
 
     if (error) {
 
-        console.error(error);
-
-
-        alert(
-            "❌ Order দিতে সমস্যা হয়েছে।\n\n" +
-            error.message
+        console.error(
+            "Order Error:",
+            error
         );
 
 
+        alert(
+            "❌ Order দিতে সমস্যা হয়েছে:\n\n" +
+            error.message
+        );
+
         return;
-
     }
-
 
 
     alert(
@@ -933,31 +1496,42 @@ async function placeOrder() {
     );
 
 
-
-    document.getElementById(
-        "trackingOrderId"
-    ).value =
-        orderId;
-
+    const trackingInput =
+        document.getElementById(
+            "trackingOrderId"
+        );
 
 
-    document.getElementById(
-        "tracking"
-    ).scrollIntoView({
-        behavior: "smooth"
-    });
+    if (trackingInput) {
 
+        trackingInput.value =
+            orderId;
+
+    }
+
+
+    const tracking =
+        document.getElementById(
+            "tracking"
+        );
+
+
+    if (tracking) {
+
+        tracking.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
 
 }
 
 
-
-/* =========================
-   ORDER TRACKING
-========================= */
+/* =========================================
+   TRACK ORDER
+========================================= */
 
 async function trackOrder() {
-
 
     const input =
         document.getElementById(
@@ -975,30 +1549,26 @@ async function trackOrder() {
         input.value.trim();
 
 
-
     if (!orderId) {
 
         result.innerHTML =
             "<p>⚠️ Order ID লিখুন।</p>";
 
         return;
-
     }
-
 
 
     result.innerHTML =
         "<p>🔎 Order খোঁজা হচ্ছে...</p>";
 
 
-
     const {
         data,
         error
-    } = await supabaseClient
+    } = await shopSupabase
         .from("orders")
         .select(
-            "order_id, customer_name, total, status, created_at"
+            "order_id,customer_name,total,status,created_at"
         )
         .eq(
             "order_id",
@@ -1007,19 +1577,24 @@ async function trackOrder() {
         .maybeSingle();
 
 
-
     if (error) {
 
-        console.error(error);
+        console.error(
+            "Tracking Error:",
+            error
+        );
 
 
-        result.innerHTML =
-            "<p>❌ Order খুঁজতে সমস্যা হয়েছে।</p>";
+        result.innerHTML = `
+            <p style="color:red;">
+                ❌ Order খুঁজতে সমস্যা হয়েছে।
+                <br>
+                ${error.message}
+            </p>
+        `;
 
         return;
-
     }
-
 
 
     if (!data) {
@@ -1028,14 +1603,11 @@ async function trackOrder() {
             "<p>❌ এই Order ID পাওয়া যায়নি।</p>";
 
         return;
-
     }
-
 
 
     let statusText =
         data.status || "Pending";
-
 
 
     if (
@@ -1048,49 +1620,35 @@ async function trackOrder() {
     }
 
 
-
     result.innerHTML = `
 
-        <div
-            style="
-                padding:20px;
-                background:#f5f5f5;
-                border-radius:10px;
-            ">
+        <div style="
+            padding:20px;
+            background:#f5f5f5;
+            border-radius:10px;
+        ">
 
             <h3>
                 📦 Order Found
             </h3>
 
             <p>
-                <strong>
-                    Order ID:
-                </strong>
-
+                <strong>Order ID:</strong>
                 ${data.order_id}
             </p>
 
             <p>
-                <strong>
-                    Customer:
-                </strong>
-
+                <strong>Customer:</strong>
                 ${data.customer_name}
             </p>
 
             <p>
-                <strong>
-                    Total:
-                </strong>
-
+                <strong>Total:</strong>
                 ৳${data.total}
             </p>
 
             <p>
-                <strong>
-                    Status:
-                </strong>
-
+                <strong>Status:</strong>
                 ${statusText}
             </p>
 
@@ -1101,142 +1659,43 @@ async function trackOrder() {
 }
 
 
+/* =========================================
+   DIVISION CHANGE
+========================================= */
 
-/* =========================
-   UPDATE SUMMARY
-========================= */
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
 
-setInterval(
-    updateOrderSummary,
-    500
+        const division =
+            document.getElementById(
+                "division"
+            );
+
+
+        if (division) {
+
+            division.addEventListener(
+                "change",
+                updateOrderSummary
+            );
+
+        }
+
+
+        /* প্রথমবার পণ্য লোড */
+
+        loadProducts();
+
+        updateCart();
+
+        updateOrderSummary();
+
+    }
 );
 
-
 </script>
 
-
-
-<!-- =========================
-     YOUR SCRIPT
-========================= -->
-
-<script src="script.js?v=5">
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", async function () {
-
-    const box = document.getElementById("productList");
-
-    if (!box) {
-        alert("❌ productList পাওয়া যায়নি");
-        return;
-    }
-
-    box.innerHTML = `
-        <div style="text-align:center;padding:30px;">
-            🔄 Supabase থেকে পণ্য আনা হচ্ছে...
-        </div>
-    `;
-
-    try {
-
-        if (!window.supabase) {
-            box.innerHTML = `
-                <div style="color:red;text-align:center;padding:30px;">
-                    ❌ Supabase library লোড হয়নি।
-                </div>
-            `;
-            return;
-        }
-
-        const testClient = window.supabase.createClient(
-            "https://dcmeprqtygptljxjnbku.supabase.co",
-            "sb_publishable_UQ_deuuX94nqT77envaRJg_VZXMhZqC"
-        );
-
-        const { data, error } = await testClient
-            .from("products")
-            .select("id,name,price,image")
-            .order("id", { ascending: false });
-
-        if (error) {
-            box.innerHTML = `
-                <div style="
-                    color:red;
-                    text-align:center;
-                    padding:30px;
-                    background:#fff0f0;
-                ">
-                    <h3>❌ Supabase Error</h3>
-                    <p>${error.message}</p>
-                    <p>Code: ${error.code || "N/A"}</p>
-                </div>
-            `;
-            return;
-        }
-
-        if (!data || data.length === 0) {
-            box.innerHTML = `
-                <div style="text-align:center;padding:30px;">
-                    📦 কোনো পণ্য পাওয়া যায়নি।
-                </div>
-            `;
-            return;
-        }
-
-        box.innerHTML = "";
-
-        data.forEach(product => {
-
-            box.innerHTML += `
-                <div class="product">
-
-                    <img
-                        src="${product.image || ""}"
-                        alt="${product.name || "Product"}"
-                        style="width:100%;"
-                    >
-
-                    <h3>
-                        ${product.name || "Product"}
-                    </h3>
-
-                    <div class="price">
-                        ৳${Number(product.price || 0)}
-                    </div>
-
-                    <button
-                        onclick="addToCart('${product.id}')">
-                        🛒 Add to Cart
-                    </button>
-
-                    <button
-                        onclick="buyNow('${product.id}')">
-                        ⚡ Buy Now
-                    </button>
-
-                </div>
-            `;
-
-        });
-
-    } catch (err) {
-
-        box.innerHTML = `
-            <div style="
-                color:red;
-                text-align:center;
-                padding:30px;
-            ">
-                <h3>❌ JavaScript Error</h3>
-                <p>${err.message || err}</p>
-            </div>
-        `;
-
-    }
-
-});
-</script>
 
 </body>
 
