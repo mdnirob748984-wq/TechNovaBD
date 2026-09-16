@@ -513,15 +513,19 @@
 
         catch (error) {
 
-    console.error("PRODUCT ERROR:", error);
+            console.error("LOGIN ERROR:", error);
 
-    showMessage(
-        "productMessage",
-        "❌ Product Save করা যায়নি।<br><br>" +
-        "<strong>Error:</strong><br>" +
-        escapeHtml(error.message || String(error)),
-        "error"
-    );
+            showMessage(
+                "loginMessage",
+                "❌ Login করা যায়নি।<br><br>" +
+                "<strong>Error:</strong><br>" +
+                escapeHtml(error.message || String(error)),
+                "error"
+            );
+
+        }
+
+    }
 
         }
 
