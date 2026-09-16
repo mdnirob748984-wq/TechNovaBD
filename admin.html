@@ -516,11 +516,11 @@
             console.error(error);
 
             showMessage(
-                "loginMessage",
-                "❌ Login failed: " +
-                error.message,
-                "error"
-            );
+    "productMessage",
+    "❌ Product Save করা যায়নি।<br><br>" +
+    escapeHtml(error.message),
+    "error"
+);
 
         }
 
