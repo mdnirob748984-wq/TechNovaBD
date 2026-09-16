@@ -743,5 +743,43 @@
 
 <script src="script.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL =
+    "https://dcmeprqtygptljxjnbku.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_UQ_deuuX94nqT77envaRJg_VZXMhZqC";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+async function checkLogin() {
+
+    const {
+        data,
+        error
+    } = await supabaseClient.auth.getSession();
+
+    if (error || !data.session) {
+
+        window.location.replace("login.html");
+
+        return;
+    }
+
+    console.log(
+        "Logged in:",
+        data.session.user.email
+    );
+}
+
+checkLogin();
+</script>
+
 </body>
                 </html>
