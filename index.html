@@ -6,339 +6,191 @@
 
     <title>TechNovaBD - Online Shop</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            color: #222;
-        }
-
-        header {
-            background: #111827;
-            color: white;
-            padding: 18px;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0 0 8px;
-        }
-
-        header p {
-            margin: 0;
-        }
-
-        .search-box {
-            padding: 15px;
-            text-align: center;
-            background: white;
-        }
-
-        .search-box input {
-            width: 95%;
-            max-width: 500px;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            padding: 15px;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .product {
-            background: white;
-            border-radius: 10px;
-            padding: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        .product img {
-            width: 100%;
-            height: 180px;
-            object-fit: contain;
-            border-radius: 8px;
-            background: #fafafa;
-        }
-
-        .product h3 {
-            margin: 10px 0 5px;
-            font-size: 18px;
-        }
-
-        .price {
-            font-size: 19px;
-            font-weight: bold;
-            margin: 8px 0;
-        }
-
-        button {
-            border: none;
-            padding: 10px 15px;
-            border-radius: 7px;
-            cursor: pointer;
-            font-size: 15px;
-        }
-
-        .add-btn {
-            width: 100%;
-            background: #16a34a;
-            color: white;
-        }
-
-        .cart-box {
-            background: white;
-            margin: 15px auto;
-            padding: 15px;
-            max-width: 800px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-            gap: 10px;
-        }
-
-        .qty button {
-            background: #ddd;
-            padding: 5px 10px;
-        }
-
-        .checkout {
-            background: white;
-            margin: 15px auto;
-            padding: 20px;
-            max-width: 800px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        .checkout h2 {
-            margin-top: 0;
-        }
-
-        .checkout input,
-        .checkout select,
-        .checkout textarea {
-            width: 100%;
-            padding: 12px;
-            margin: 7px 0 12px;
-            border: 1px solid #ccc;
-            border-radius: 7px;
-            font-size: 15px;
-        }
-
-        .total-box {
-            background: #f3f4f6;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-        }
-
-        .total-row {
-            display: flex;
-            justify-content: space-between;
-            margin: 8px 0;
-        }
-
-        .grand-total {
-            font-size: 21px;
-            font-weight: bold;
-            border-top: 1px solid #ccc;
-            padding-top: 10px;
-        }
-
-        .order-btn {
-            width: 100%;
-            background: #2563eb;
-            color: white;
-            font-size: 17px;
-            padding: 13px;
-        }
-
-        .message {
-            text-align: center;
-            padding: 15px;
-            font-weight: bold;
-        }
-
-        footer {
-            background: #111827;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header>
-    <h1>TechNovaBD</h1>
-    <p>আপনার বিশ্বস্ত অনলাইন শপ</p>
-</header>
 
-<div class="search-box">
-    <input
-        type="text"
-        id="search"
-        placeholder="প্রোডাক্ট খুঁজুন..."
-        oninput="searchProducts()"
-    >
-</div>
-
-<div id="products" class="products">
-    <div class="message">প্রোডাক্ট লোড হচ্ছে...</div>
-</div>
-
-<div class="cart-box">
-    <h2>🛒 আপনার Cart</h2>
-
-    <div id="cartItems">
-        <p>Cart খালি।</p>
+    <div class="logo">
+        TechNovaBD
     </div>
 
-    <div class="total-box">
-        <div class="total-row">
-            <span>পণ্যের মোট:</span>
-            <span><strong><span id="cartTotal">0</span> টাকা</strong></span>
-        </div>
-    </div>
-</div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#products">Products</a>
+        <a href="#tracking">Order Tracking</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
-<div class="checkout">
-
-    <h2>📦 অর্ডার করুন</h2>
-
-    <label>আপনার নাম</label>
-    <input
-        type="text"
-        id="customerName"
-        placeholder="আপনার নাম লিখুন"
-    >
-
-    <label>মোবাইল নম্বর</label>
-    <input
-        type="tel"
-        id="phone"
-        placeholder="01XXXXXXXXX"
-    >
-
-    <label>বিভাগ</label>
-
-    <select
-        id="division"
-        onchange="updateDeliveryCharge()"
-    >
-        <option value="">বিভাগ নির্বাচন করুন</option>
-
-        <option value="ঢাকা">ঢাকা</option>
-        <option value="চট্টগ্রাম">চট্টগ্রাম</option>
-        <option value="রাজশাহী">রাজশাহী</option>
-        <option value="খুলনা">খুলনা</option>
-        <option value="বরিশাল">বরিশাল</option>
-        <option value="সিলেট">সিলেট</option>
-        <option value="রংপুর">রংপুর</option>
-        <option value="ময়মনসিংহ">ময়মনসিংহ</option>
-    </select>
-
-    <label>জেলা</label>
-
-    <input
-        type="text"
-        id="district"
-        placeholder="জেলার নাম লিখুন"
-    >
-
-    <label>উপজেলা / থানা</label>
-
-    <input
-        type="text"
-        id="upazila"
-        placeholder="উপজেলা / থানার নাম"
-    >
-
-    <label>গ্রাম / এলাকা</label>
-
-    <input
-        type="text"
-        id="village"
-        placeholder="গ্রাম / এলাকার নাম"
-    >
-
-    <label>বিস্তারিত ঠিকানা</label>
-
-    <textarea
-        id="detailsAddress"
-        rows="3"
-        placeholder="বাড়ি নম্বর, রোড, মার্কেট ইত্যাদি"
-    ></textarea>
-
-    <div class="total-box">
-
-        <div class="total-row">
-            <span>পণ্যের মোট:</span>
-
-            <span>
-                <strong>
-                    <span id="productTotal">0</span> টাকা
-                </strong>
-            </span>
-        </div>
-
-        <div class="total-row">
-            <span>ডেলিভারি চার্জ:</span>
-
-            <span>
-                <strong>
-                    <span id="deliveryCharge">0</span> টাকা
-                </strong>
-            </span>
-        </div>
-
-        <div class="total-row grand-total">
-            <span>সর্বমোট:</span>
-
-            <span>
-                <span id="grandTotal">0</span> টাকা
-            </span>
-        </div>
-
-    </div>
-
-    <button
-        class="order-btn"
-        onclick="placeOrder()"
-    >
-        অর্ডার কনফার্ম করুন
+    <button class="cart-btn" onclick="openCart()">
+        🛒 Cart
+        <span id="cartCount">0</span>
     </button>
 
-    <div id="orderMessage"></div>
+</header>
+
+
+<!-- HOME -->
+
+<section id="home" class="hero">
+
+    <h1>Welcome to TechNovaBD</h1>
+
+    <p>
+        আপনার প্রয়োজনীয় Technology Products এক জায়গায়
+    </p>
+
+    <button onclick="scrollToProducts()">
+        Shop Now
+    </button>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section id="products">
+
+    <h2>Our Products</h2>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="পণ্য খুঁজুন..."
+            oninput="searchProducts()"
+        >
+
+    </div>
+
+    <div
+        id="productList"
+        class="products">
+    </div>
+
+</section>
+
+
+<!-- CART MODAL -->
+
+<div id="cartModal" class="modal">
+
+    <div class="modal-content">
+
+        <span
+            class="close"
+            onclick="closeCart()">
+            ×
+        </span>
+
+        <h2>🛒 Your Cart</h2>
+
+        <div id="cartItems"></div>
+
+        <h3>
+            Total: ৳
+            <span id="cartTotal">0</span>
+        </h3>
+
+        <button
+            onclick="checkout()"
+            class="checkout-btn">
+            Checkout
+        </button>
+
+    </div>
 
 </div>
 
+
+<!-- ORDER TRACKING -->
+
+<section id="tracking" class="contact">
+
+    <h2>📦 Order Tracking</h2>
+
+    <p>
+        আপনার Order ID লিখে অর্ডারের বর্তমান Status দেখুন।
+    </p>
+
+    <input
+        type="text"
+        id="trackingOrderId"
+        placeholder="যেমন: TN1750000000000"
+    >
+
+    <button onclick="trackOrder()">
+        Track Order
+    </button>
+
+    <div
+        id="trackingResult"
+        style="margin-top:20px;">
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact" class="contact">
+
+    <h2>Contact Us</h2>
+
+    <p>
+        📱 WhatsApp 1:
+        <a
+            href="https://wa.me/8801759748984"
+            target="_blank">
+            01759748984
+        </a>
+    </p>
+
+    <p>
+        📱 WhatsApp 2:
+        <a
+            href="https://wa.me/8801777556984"
+            target="_blank">
+            01777556984
+        </a>
+    </p>
+
+    <p>
+        📧 Gmail 1:
+        <a
+            href="mailto:mdnirob748984@gmail.com">
+            mdnirob748984@gmail.com
+        </a>
+    </p>
+
+    <p>
+        📧 Gmail 2:
+        <a
+            href="mailto:technovabd779@gmail.com">
+            technovabd779@gmail.com
+        </a>
+    </p>
+
+</section>
+
+
+<!-- FOOTER -->
+
 <footer>
-    <p>© 2026 TechNovaBD</p>
-    <p>যোগাযোগ করে অর্ডার সম্পর্কিত তথ্য জানতে পারবেন।</p>
+
+    <p>
+        © 2026 TechNovaBD. All Rights Reserved.
+    </p>
+
 </footer>
 
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
@@ -348,675 +200,121 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
     "sb_publishable_UQ_deuuX94nqT77envaRJg_VZXMhZqC";
 
-
-let products = [];
-
-let cart = [];
-
-let total = 0;
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
 /* =========================
-   LOAD PRODUCTS
+   ORDER TRACKING
 ========================= */
 
-async function loadProducts() {
+async function trackOrder() {
 
-    try {
+    const input =
+        document.getElementById("trackingOrderId");
 
-        const response = await fetch(
-            SUPABASE_URL +
-            "/rest/v1/products?select=*&order=created_at.desc",
-            {
-                method: "GET",
+    const result =
+        document.getElementById("trackingResult");
 
-                headers: {
-                    "apikey": SUPABASE_KEY,
-                    "Authorization":
-                        "Bearer " + SUPABASE_KEY
-                }
-            }
-        );
+    const orderId =
+        input.value.trim();
 
-        if (!response.ok) {
+    if (!orderId) {
 
-            throw new Error(
-                "Product load failed"
-            );
+        result.innerHTML =
+            "<p>⚠️ Order ID লিখুন।</p>";
 
-        }
-
-        products = await response.json();
-
-        displayProducts(products);
-
+        return;
     }
 
-    catch (error) {
+
+    result.innerHTML =
+        "<p>🔎 Order খোঁজা হচ্ছে...</p>";
+
+
+    const { data, error } =
+        await supabaseClient
+            .from("orders")
+            .select(
+                "order_id, customer_name, total, status, created_at"
+            )
+            .eq("order_id", orderId)
+            .maybeSingle();
+
+
+    if (error) {
 
         console.error(error);
 
-        document.getElementById("products").innerHTML =
-            '<div class="message">প্রোডাক্ট লোড করা যায়নি।</div>';
-
-    }
-
-}
-
-
-/* =========================
-   DISPLAY PRODUCTS
-========================= */
-
-function displayProducts(list) {
-
-    const container =
-        document.getElementById("products");
-
-    if (!list.length) {
-
-        container.innerHTML =
-            '<div class="message">কোনো প্রোডাক্ট পাওয়া যায়নি।</div>';
+        result.innerHTML =
+            "<p>❌ Order খুঁজতে সমস্যা হয়েছে।</p>";
 
         return;
     }
 
-    container.innerHTML = "";
 
-    list.forEach(product => {
+    if (!data) {
 
-        const image =
-            product.image ||
-            "https://via.placeholder.com/300";
-
-        const price =
-            Number(product.price) || 0;
-
-        container.innerHTML += `
-
-            <div class="product">
-
-                <img
-                    src="${image}"
-                    alt="${product.name || "Product"}"
-                    onerror="this.src='https://via.placeholder.com/300'"
-                >
-
-                <h3>
-                    ${product.name || "Product"}
-                </h3>
-
-                <p>
-                    ${product.description || ""}
-                </p>
-
-                <div class="price">
-                    ${price} টাকা
-                </div>
-
-                <button
-                    class="add-btn"
-                    onclick="addToCart(${product.id})"
-                >
-                    🛒 Cart-এ যোগ করুন
-                </button>
-
-            </div>
-
-        `;
-
-    });
-
-}
-
-
-/* =========================
-   SEARCH
-========================= */
-
-function searchProducts() {
-
-    const search =
-        document
-        .getElementById("search")
-        .value
-        .toLowerCase()
-        .trim();
-
-    const filtered =
-        products.filter(product =>
-
-            (product.name || "")
-            .toLowerCase()
-            .includes(search)
-
-        );
-
-    displayProducts(filtered);
-
-}
-
-
-/* =========================
-   ADD TO CART
-========================= */
-
-function addToCart(id) {
-
-    const product =
-        products.find(p => p.id === id);
-
-    if (!product) return;
-
-    const existing =
-        cart.find(item => item.id === id);
-
-    if (existing) {
-
-        existing.quantity++;
-
-    } else {
-
-        cart.push({
-
-            id: product.id,
-
-            name: product.name,
-
-            price: Number(product.price),
-
-            quantity: 1
-
-        });
-
-    }
-
-    updateCart();
-
-}
-
-
-/* =========================
-   UPDATE CART
-========================= */
-
-function updateCart() {
-
-    const cartContainer =
-        document.getElementById("cartItems");
-
-    if (!cart.length) {
-
-        cartContainer.innerHTML =
-            "<p>Cart খালি।</p>";
-
-        total = 0;
-
-        updateTotals();
+        result.innerHTML =
+            "<p>❌ এই Order ID পাওয়া যায়নি।</p>";
 
         return;
     }
 
-    cartContainer.innerHTML = "";
 
-    total = 0;
-
-    cart.forEach(item => {
-
-        const itemTotal =
-            item.price * item.quantity;
-
-        total += itemTotal;
-
-        cartContainer.innerHTML += `
-
-            <div class="cart-item">
-
-                <div>
-
-                    <strong>
-                        ${item.name}
-                    </strong>
-
-                    <br>
-
-                    ${item.price} টাকা ×
-                    ${item.quantity}
-
-                </div>
-
-                <div class="qty">
-
-                    <button
-                        onclick="decreaseQuantity(${item.id})"
-                    >
-                        −
-                    </button>
-
-                    <button
-                        onclick="increaseQuantity(${item.id})"
-                    >
-                        +
-                    </button>
-
-                    <button
-                        onclick="removeFromCart(${item.id})"
-                    >
-                        ❌
-                    </button>
-
-                </div>
-
-            </div>
-
-        `;
-
-    });
-
-    document.getElementById("cartTotal").textContent =
-        total;
-
-    updateTotals();
-
-}
+    let statusText =
+        data.status || "Pending";
 
 
-/* =========================
-   INCREASE QUANTITY
-========================= */
+    if (statusText === "Delivered") {
 
-function increaseQuantity(id) {
-
-    const item =
-        cart.find(item => item.id === id);
-
-    if (item) {
-
-        item.quantity++;
-
-        updateCart();
+        statusText =
+            "Completed / Delivered";
 
     }
 
+
+    result.innerHTML = `
+
+        <div>
+
+            <h3>📦 Order Found</h3>
+
+            <p>
+                <strong>Order ID:</strong>
+                ${data.order_id}
+            </p>
+
+            <p>
+                <strong>Customer:</strong>
+                ${data.customer_name}
+            </p>
+
+            <p>
+                <strong>Total:</strong>
+                ৳${data.total}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                ${statusText}
+            </p>
+
+        </div>
+
+    `;
 }
-
-
-/* =========================
-   DECREASE QUANTITY
-========================= */
-
-function decreaseQuantity(id) {
-
-    const item =
-        cart.find(item => item.id === id);
-
-    if (!item) return;
-
-    if (item.quantity > 1) {
-
-        item.quantity--;
-
-    } else {
-
-        cart =
-            cart.filter(item => item.id !== id);
-
-    }
-
-    updateCart();
-
-}
-
-
-/* =========================
-   REMOVE FROM CART
-========================= */
-
-function removeFromCart(id) {
-
-    cart =
-        cart.filter(item => item.id !== id);
-
-    updateCart();
-
-}
-
-
-/* =========================
-   DELIVERY CHARGE
-========================= */
-
-function getDeliveryCharge() {
-
-    const division =
-        document.getElementById("division").value;
-
-    /*
-       ঢাকা = 60 টাকা
-       অন্যান্য বিভাগ = 130 টাকা
-    */
-
-    if (division === "ঢাকা") {
-
-        return 60;
-
-    }
-
-    if (division !== "") {
-
-        return 130;
-
-    }
-
-    return 0;
-
-}
-
-
-/* =========================
-   UPDATE TOTAL
-========================= */
-
-function updateDeliveryCharge() {
-
-    updateTotals();
-
-}
-
-
-function updateTotals() {
-
-    const deliveryCharge =
-        getDeliveryCharge();
-
-    const grandTotal =
-        total + deliveryCharge;
-
-    document.getElementById("productTotal").textContent =
-        total;
-
-    document.getElementById("deliveryCharge").textContent =
-        deliveryCharge;
-
-    document.getElementById("grandTotal").textContent =
-        grandTotal;
-
-}
-
-
-/* =========================
-   PLACE ORDER
-========================= */
-
-async function placeOrder() {
-
-    if (!cart.length) {
-
-        alert(
-            "আগে Cart-এ কোনো প্রোডাক্ট যোগ করুন।"
-        );
-
-        return;
-
-    }
-
-
-    const name =
-        document
-        .getElementById("customerName")
-        .value
-        .trim();
-
-
-    const phone =
-        document
-        .getElementById("phone")
-        .value
-        .trim();
-
-
-    const division =
-        document
-        .getElementById("division")
-        .value;
-
-
-    const district =
-        document
-        .getElementById("district")
-        .value
-        .trim();
-
-
-    const upazila =
-        document
-        .getElementById("upazila")
-        .value
-        .trim();
-
-
-    const village =
-        document
-        .getElementById("village")
-        .value
-        .trim();
-
-
-    const detailsAddress =
-        document
-        .getElementById("detailsAddress")
-        .value
-        .trim();
-
-
-    if (
-        !name ||
-        !phone ||
-        !division ||
-        !district ||
-        !upazila ||
-        !village ||
-        !detailsAddress
-    ) {
-
-        alert(
-            "সব তথ্য পূরণ করুন।"
-        );
-
-        return;
-
-    }
-
-
-    const deliveryCharge =
-        getDeliveryCharge();
-
-
-    const grandTotal =
-        total + deliveryCharge;
-
-
-    const orderData = {
-
-        order_id:
-            "TN" + Date.now(),
-
-        customer_name:
-            name,
-
-        phone:
-            phone,
-
-        division:
-            division,
-
-        district:
-            district,
-
-        upazila:
-            upazila,
-
-        village:
-            village,
-
-        details_address:
-            detailsAddress,
-
-        products:
-            cart.map(item => ({
-
-                name:
-                    item.name,
-
-                quantity:
-                    item.quantity,
-
-                price:
-                    Number(item.price)
-
-            })),
-
-        total:
-            grandTotal,
-
-        status:
-            "Pending"
-
-    };
-
-
-    const message =
-        document.getElementById(
-            "orderMessage"
-        );
-
-    message.innerHTML =
-        "অর্ডার পাঠানো হচ্ছে...";
-
-
-    try {
-
-        const response =
-            await fetch(
-
-                SUPABASE_URL +
-                "/rest/v1/orders",
-
-                {
-
-                    method: "POST",
-
-                    headers: {
-
-                        "apikey":
-                            SUPABASE_KEY,
-
-                        "Authorization":
-                            "Bearer " +
-                            SUPABASE_KEY,
-
-                        "Content-Type":
-                            "application/json",
-
-                        "Prefer":
-                            "return=minimal"
-
-                    },
-
-                    body:
-                        JSON.stringify(orderData)
-
-                }
-
-            );
-
-
-        if (!response.ok) {
-
-            const error =
-                await response.text();
-
-            console.error(error);
-
-            throw new Error(
-                "Order failed"
-            );
-
-        }
-
-
-        message.innerHTML = `
-            <div style="color:green;">
-                ✅ আপনার অর্ডার সফলভাবে গ্রহণ করা হয়েছে!
-                <br>
-                মোট: ${grandTotal} টাকা
-            </div>
-        `;
-
-
-        cart = [];
-
-        updateCart();
-
-
-        document
-            .getElementById("customerName")
-            .value = "";
-
-        document
-            .getElementById("phone")
-            .value = "";
-
-        document
-            .getElementById("division")
-            .value = "";
-
-        document
-            .getElementById("district")
-            .value = "";
-
-        document
-            .getElementById("upazila")
-            .value = "";
-
-        document
-            .getElementById("village")
-            .value = "";
-
-        document
-            .getElementById("detailsAddress")
-            .value = "";
-
-
-        updateTotals();
-
-    }
-
-    catch (error) {
-
-        console.error(error);
-
-        message.innerHTML = `
-            <div style="color:red;">
-                ❌ অর্ডার পাঠানো যায়নি।
-                আবার চেষ্টা করুন।
-            </div>
-        `;
-
-    }
-
-}
-
-
-/* =========================
-   START
-========================= */
-
-loadProducts();
-
-updateTotals();
 
 </script>
+
+
+<!-- MAIN SCRIPT -->
+
+<script src="script.js"></script>
+
 
 </body>
 </html>
